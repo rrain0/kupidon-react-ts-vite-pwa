@@ -1,7 +1,7 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import { css } from '@emotion/react'
-import { arr } from '@utils/base/ArrayU.ts'
+import { arr } from '@utils/base/array/ArrayU.ts'
 import { rf3 } from '@utils/base/math/mathUtils.ts'
 import { rangeLoop, rangeMapClamp } from '@utils/base/math/rangeUtils.ts'
 import React from 'react'

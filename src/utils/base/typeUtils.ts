@@ -164,7 +164,6 @@ export type MapperN<Ins extends any[], Out> = (...values: Ins) => Out
 export type Predicate<T> = (v: T) => boolean
 export const tobool: Predicate<any> = value => !!value
 export type Filter<T> = (v: T) => any
-export type ArrFilter<T> = (v: T, i: number, arr: T[]) => any
 export const defaultFilter: Filter<any> = tobool
 
 export type Combiner<T1, T2 = T1> = (a: T1, b: T2) => T1

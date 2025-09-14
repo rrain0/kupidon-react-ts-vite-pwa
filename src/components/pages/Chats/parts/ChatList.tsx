@@ -3,7 +3,7 @@ import { createSpring, createSpringAnimation } from '@animated/SpringAnimation.t
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import styled from '@emotion/styled'
 import { Spring2DAnimationData, useItemDrag } from '@utils/app/gestures/useItemDrag.ts'
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { diff } from '@utils/base/array/arrayDiffUtils.ts'
 import { useNoTouchAction } from '@utils/gestures/pointer/useNoTouchAction.ts'
 import { useArray } from '@utils/state/react/useArray.ts'
 import { useAsCallback } from '@utils/state/react/base/useAsCallback.ts'
@@ -18,8 +18,8 @@ import ChatListContextMenu, {
 } from 'src/components/pages/Chats/parts/ChatListContextMenu.tsx'
 import ChatListToItem from 'src/components/pages/Chats/parts/ChatListToItem.tsx'
 import { ChatListItemWidgetData } from 'src/components/pages/Chats/parts/ChatListItemWidget.tsx'
-import { offsetToPageContentPaddings } from 'src/components/components/page/offsetToPageContentPaddings.ts'
-
+import { offsetToPageContentPaddings }
+  from 'src/components/components/page/offsetToPageContentPaddings.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { isundef } from '@utils/base/typeUtils.ts'
 import { isdef } from '@utils/base/typeUtils.ts'
@@ -103,7 +103,7 @@ const ChatList = React.memo((props: ChatListProps) => {
     }
     // Анимируем изменения элементов
     else {
-      const [fwd, back] = ArrayU.diff(items, newItems, (a, b) => a.id === b.id)
+      const [fwd, back] = diff(items, newItems, (a, b) => a.id === b.id)
       
       const fLen = fwd.length
       const bLen = back.length

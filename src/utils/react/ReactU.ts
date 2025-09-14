@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React, { CSSProperties, useEffect } from 'react'
-import { ArrayU, arrEq } from 'src/utils/base/ArrayU.ts'
+import { arrEq } from 'src/utils/base/array/ArrayU.ts'
 import { objectMap } from 'src/utils/base/ObjectU.ts'
 import { camelCaseToKebabCase } from 'src/utils/base/stringUtils.ts'
 import { Pu } from 'src/utils/base/typeUtils.ts'

@@ -1,4 +1,4 @@
-import { ArrayU } from 'src/utils/base/ArrayU.ts'
+import { arrMapToIf, arrMapOneToIf } from 'src/utils/base/array/ArrayU.ts'
 import { withThrottle } from 'src/utils/base/asyncUtils.ts'
 import { random } from 'src/utils/base/math/randomUtils.ts'
 import { fetchToBlob, blobToDataUrl } from 'src/utils/bin/binDataUtils.ts'
@@ -11,7 +11,6 @@ import {
   MediaOperation,
   newDefaultMediaOperation,
 } from '@libs/media/Media.ts'
-import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import { SetterOrUpdater } from 'src/utils/base/typeUtils.ts'
 
 
@@ -32,7 +31,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
       const savedDownloads = getDownloads()
       const usedDownloads: Downloads = new Map()
       
-      const newMedias = ArrayU.mapToIf(medias, m => {
+      const newMedias = arrMapToIf(medias, m => {
         // Если нет медиа, то ничего не делаем
         if (!m) return m
         
@@ -106,7 +105,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           if (savedDownload) {
             savedDownload.download = { ...savedDownload.download, ...updateDownload }
           }
-          setMedias(medias => mapFirstToIfFoundBy({
+          setMedias(medias => arrMapOneToIf({
             arr: medias,
             filter: m => m?.download && m.download.id === startMediaD.download.id,
             mapper: m => m && ({

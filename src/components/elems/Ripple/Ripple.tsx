@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { ArrFirstOptional } from '@utils/base/ArrayU.ts'
+import { ArrFirstOptional } from '@utils/base/array/arrayMoreUtils.ts'
 import { objectKeys } from '@utils/base/ObjectU.ts'
 import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
 import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'

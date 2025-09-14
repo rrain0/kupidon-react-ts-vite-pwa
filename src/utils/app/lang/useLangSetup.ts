@@ -1,5 +1,5 @@
 import { useLayoutEffect, useMemo } from 'react'
-import { arrIsNonEmpty } from 'src/utils/base/ArrayU.ts'
+import { arrIsNonEmpty } from 'src/utils/base/array/arrayMoreUtils.ts'
 import { Lang } from 'src/utils/app/lang/Lang.ts'
 import { useSystemLang } from 'src/utils/react/system/useSystemLang.ts'
 import { useAppZustand } from 'src/zustand/app/appZustand.ts'

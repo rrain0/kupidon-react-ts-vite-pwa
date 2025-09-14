@@ -9,7 +9,8 @@ import {
 } from '@utils/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
-import { ArrayU, arrOfIndices } from '@utils/base/ArrayU.ts'
+import { arrOfIndices, arrMapOneToIf } from '@utils/base/array/ArrayU.ts'
+import { diff2, arrMergeTo } from '@utils/base/array/arrayDiffUtils.ts'
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import { random } from '@utils/base/math/randomUtils.ts'
 import { useCssWhRef } from '@utils/view/useCssWhRef.ts'
@@ -48,7 +49,6 @@ import { useFormDerivedData } from '@libs/form-data/hooks/useFormDerivedData.ts'
 import { StagedProgress } from '@utils/ui/StagedProgress.ts'
 import { useAsyncEffect } from 'src/utils/react/useAsyncEffect.ts'
 import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
-import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import mapFailureCodeToUiText = ProfilePageValidation.mapFailureCodeToUiText
 import validators = ProfilePageValidation.validators
 import defaultValues = ProfilePageValidation.defaultValues
@@ -156,7 +156,7 @@ const ProfilePage = React.memo(() => {
         // we needn't take upload, because it is local
         
         // get all downloads & downloaded data from same existing photos
-        newValues.initialValues.photos = ArrayU.combine(
+        newValues.initialValues.photos = arrMergeTo(
           newValues.initialValues.photos, [...s.initialValues.photos, ...s.photos],
           (initialPhoto, oldPhoto) => ({
             ...initialPhoto,
@@ -183,7 +183,7 @@ const ProfilePage = React.memo(() => {
         })
         
         // stop operations for discarded photos
-        ArrayU.diff2(
+        diff2(
           s.initialValues.photos,
           newValues.photos,
           (a, b) => a.id === b.id
@@ -195,7 +195,7 @@ const ProfilePage = React.memo(() => {
               diff.fromElem.conversion?.abort()
             }
           })
-        ArrayU.diff2(
+        diff2(
           s.photos,
           newValues.photos,
           (a, b) => a.id === b.id
@@ -258,13 +258,13 @@ const ProfilePage = React.memo(() => {
         
         setFormValues(form => ({ ...form,
           initialValues: { ...form.initialValues,
-            photos: mapFirstToIfFoundBy({
+            photos: arrMapOneToIf({
               arr: form.initialValues.photos,
               filter: elem => elem.id === photo.id,
               mapper: elem => ({ ...elem, ...downloadStart }),
             }),
           },
-          photos: mapFirstToIfFoundBy({
+          photos: arrMapOneToIf({
             arr: form.photos,
             filter: elem => elem.id === photo.id,
             mapper: elem => ({ ...elem, ...downloadStart }),
@@ -277,7 +277,7 @@ const ProfilePage = React.memo(() => {
         ) => {
           setFormValues(form => ({ ...form,
             initialValues: { ...form.initialValues,
-              photos: mapFirstToIfFoundBy({
+              photos: arrMapOneToIf({
                 arr: form.initialValues.photos,
                 filter: elem => elem.download?.id === downloadStart.download.id,
                 mapper: photo => ({ ...photo,
@@ -288,7 +288,7 @@ const ProfilePage = React.memo(() => {
                 }),
               }),
             },
-            photos: mapFirstToIfFoundBy({
+            photos: arrMapOneToIf({
               arr: form.photos,
               filter: elem => elem.download?.id === downloadStart.download.id,
               mapper: photo => ({ ...photo,

@@ -1,5 +1,4 @@
-import { ArrayU } from '@utils/base/ArrayU.ts'
-
+import { arrRemove } from '@utils/base/array/ArrayU.ts'
 import { useEffect, useId, useMemo, useState, useTransition } from 'react'
 import { NavBarPlace } from 'src/components/widgets/NavBar/NavBar.tsx'
 import { navStack } from 'src/components/widgets/NavBar/navStack.ts'
@@ -38,7 +37,7 @@ export const useNavBar = (props?: UseNavBarProps) => {
     
     return () => {
       console.log('navStack before', [...navStack])
-      ArrayU.remove(navStack, navState)
+      arrRemove(navStack, navState)
       console.log('navStack', [...navStack])
       setNavBar(navStack.at(-1))
     }

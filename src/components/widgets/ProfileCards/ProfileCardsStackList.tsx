@@ -5,7 +5,7 @@ import {
   getFixedForwardLoopedCarouselProps,
 } from '@utils/animated/carousel/props/fixedCarouselProps.ts'
 import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
-import { arrOfIndices } from '@utils/base/ArrayU.ts'
+import { arrOfIndices } from '@utils/base/array/ArrayU.ts'
 import { rf3 } from '@utils/base/math/mathUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { useStateAndRef } from '@utils/state/react/base/useStateAndRef.ts'

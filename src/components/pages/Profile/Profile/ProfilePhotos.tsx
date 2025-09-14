@@ -34,7 +34,12 @@ import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
 } from 'src/components/pages/Profile/options/ProfilePhotosPhotoOptions.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { ArrayU, arr } from '@utils/base/ArrayU.ts'
+import {
+  arr,
+  arrReplaceOneToIfBy,
+  arrMapOneToIf,
+  arrHasAny,
+} from '@utils/base/array/ArrayU.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { blobToDataUrl } from '@utils/bin/binDataUtils.ts'
@@ -53,9 +58,6 @@ import PlusIc from 'src/components/elems/icons/SvgIcons/pack/ui/PlusIc.tsx'
 import * as uuid from 'uuid'
 import { Cb, SetterOrUpdater } from '@utils/base/typeUtils.ts'
 import Theme = AppTheme.Theme
-import replaceFirstToIfFoundBy = ArrayU.replaceFirstToIfFoundBy
-import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
-import findBy = ArrayU.findBy
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
 
 
@@ -210,11 +212,10 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
           setSwap(undefined)
         }
         else {
-          const found = findBy(photoFrameRefs.current,
-            elem => hoveredElements.includes(elem as any)
-          )
-          if (!found.isFound) { /* nothing to do, remain previous swap */ }
-          else if (i !== found.index) setSwap([i, found.index])
+          const foundI = photoFrameRefs.current
+            .findIndex(elem => arrHasAny(hoveredElements, elem))
+          if (foundI === -1) { /* nothing to do, remain previous swap */ }
+          else if (i !== foundI) setSwap([i, foundI])
           else setSwap(undefined)
         }
       }
@@ -597,7 +598,7 @@ const onFilesSelectedBuilder = (
           photoUpdate?: Partial<MediaInArrayDUC>,
           compressionUpdate?: Partial<MediaOperation>,
         ) => {
-          setImages(images => mapFirstToIfFoundBy({
+          setImages(images => arrMapOneToIf({
             arr: images,
             filter: image => image.conversion?.id === compressionStart.conversion.id,
             mapper: image => ({ ...image,
@@ -648,7 +649,7 @@ const onFilesSelectedBuilder = (
               dataUrl: imgDataUrl,
               isReady: true,
             }
-            setImages(images => replaceFirstToIfFoundBy(images,
+            setImages(images => arrReplaceOneToIfBy(images,
               newPhoto,
               elem => elem.conversion?.id === compressionStart.conversion.id
             ))

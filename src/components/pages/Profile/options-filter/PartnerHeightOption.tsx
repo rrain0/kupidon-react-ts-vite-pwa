@@ -1,8 +1,9 @@
 import { css } from '@emotion/react'
+import { mergeMappedIf } from '@utils/base/array/arrayDiffUtils.ts'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import RulerVerticalGradIc
   from 'src/components/elems/icons/GradSvgIcons/pack/special/RulerVerticalGradIc.tsx'
-import { ArrayU, arrEq } from '@utils/base/ArrayU.ts'
+import { arrEq } from '@utils/base/array/ArrayU.ts'
 import { useStateMapperSync } from '@utils/state/react/useStateMapperSync.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import React, { useState } from 'react'
@@ -67,11 +68,11 @@ const PartnerHeightOption = React.memo(() => {
   useStateMapperSync(
     heightRange, widgetRange,
     setHeightRange, setWidgetRange,
-    (w, h) => ArrayU.mergeMappedIf(
+    (w, h) => mergeMappedIf(
       h, w,
       mapWidgetRangeToHeightRange(w), mapHeightRangeToWidgetRange(h)
     ),
-    (h, w) => ArrayU.mergeMappedIf(
+    (h, w) => mergeMappedIf(
       w, h,
       mapHeightRangeToWidgetRange(h), mapWidgetRangeToHeightRange(w)
     )

@@ -1,4 +1,4 @@
-import { arrOfIndices } from '@utils/base/ArrayU.ts'
+import { arrOfIndices } from '@utils/base/array/ArrayU.ts'
 import React, { useMemo, useRef, useState } from 'react'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import Gap from '@libs/short-propsed/components/Gap.tsx'

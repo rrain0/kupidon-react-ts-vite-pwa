@@ -1,24 +1,21 @@
 import { useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
+import { negInf, posInf } from '@utils/base/math/mathUtils.ts'
 import React, {
   useCallback,
   useEffect,
   useMemo, useRef,
   useState,
 } from 'react'
-import { ArrayU, lastI } from '@utils/base/ArrayU.ts'
+import { lastI } from '@utils/base/array/ArrayU.ts'
 import { ViewProps } from 'src/utils/view/ViewProps.ts'
 import { rangeClamp, rangeHas } from '@utils/base/math/rangeUtils.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { CssValue, parseCssStringValue } from '@utils/css/cssParserUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { Setter } from '@utils/base/typeUtils.ts'
-import findLastBy3 = ArrayU.findLastBy3
 import { nonemptyval } from '@utils/base/typeUtils.ts'
-import findBy3 = ArrayU.findBy3
 import { Cb } from '@utils/base/typeUtils.ts'
-import findLastBy = ArrayU.findLastBy
-import findBy = ArrayU.findBy
 import { isemptyval } from '@utils/base/typeUtils.ts'
 import { Defined } from '@utils/base/typeUtils.ts'
 import { isdef } from '@utils/base/typeUtils.ts'
@@ -186,11 +183,10 @@ export const useBottomSheet = (
     return snapPointsPx
   }, [computedSheetDimens, ...snapPoints])
   
-  // if sheet can be opened, then realFirstOpenIdx!==null
+  // if sheet can be opened, then realFirstOpenIdx !== null
   const realFirstOpenIdx = useMemo<number | null>(() => {
-    const f = findBy(snapPointsPx, elem => elem > 0)
-    if (!f.isFound) return null
-    return f.index
+    const foundI = snapPointsPx.findIndex(elem => elem > 0)
+    return foundI === -1 ? null : foundI
   }, [snapPointsPx])
   
   // default open idx, if sheet can be opened, then openIdx!==null
@@ -206,11 +202,10 @@ export const useBottomSheet = (
     return Math.ceil((realFirstOpenIdx + lastI(snapPointsPx)) / 2)
   }, [realFirstOpenIdx, options.defaultOpenIdx, snapPointsPx])
   
-  // if there is snap point evaluated to 0, then closeIdx!==null
+  // if there is snap point evaluated to 0, then closeIdx !== null
   const closeIdx = useMemo<number | null>(() => {
-    const f = findBy(snapPointsPx, elem => elem === 0)
-    if (!f.isFound) return null
-    return f.index
+    const foundI = snapPointsPx.findIndex(elem => elem === 0)
+    return foundI === -1 ? null : foundI
   }, [snapPointsPx])
   
   
@@ -603,18 +598,8 @@ function calculateSnapPointsPx(
         cssValueParsingError(snapPoints[cssValueI], cssValue)
       }()
       
-      const left = findLastBy3({
-        arr: snapPointsPx,
-        filter: elem => isdef(elem),
-        startIdx: cssValueI - 1,
-        orElse: Number.NEGATIVE_INFINITY,
-      }).elem as number
-      const right = findBy3({
-        arr: snapPointsPx,
-        filter: elem => isdef(elem),
-        startIdx: cssValueI + 1,
-        orElse: Number.POSITIVE_INFINITY,
-      }).elem as number
+      const left = snapPointsPx.findLast((elem, i) => i < cssValueI && isdef(elem)) ?? negInf
+      const right = snapPointsPx.find((elem, i) => i > cssValueI && isdef(elem)) ?? posInf
       computed = rangeClamp(computed, [left, right])
       
       snapPointsPx[cssValueI] = computed
@@ -647,10 +632,10 @@ function cssValueParsingError(raw: string|number, parsed: CssValue|undefined): n
 
 
 function getSnapIndexToAdjust(
-  height: number, snapPoints: (number|string)[], snapPointsPx: number[]
+  height: number, snapPoints: (number | string)[], snapPointsPx: number[]
 ): number {
   //if (!snapPointsPx.length) return null
-  const snapStart = findLastBy(snapPointsPx, elem => height >= elem).index
+  const snapStart = snapPointsPx.findLastIndex(elem => height >= elem)
   
   if (snapPoints[snapStart] === 'free') return snapStart
   //if (height === snapPointsPx[snapStart]) return null

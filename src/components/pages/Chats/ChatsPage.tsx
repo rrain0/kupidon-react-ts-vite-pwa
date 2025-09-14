@@ -1,6 +1,6 @@
 import { Env } from 'src/configs/Env.ts'
 import { useLiveUsersStatus } from '@utils/app/useLiveUsersStatus.ts'
-import { arrOfIndices } from '@utils/base/ArrayU.ts'
+import { arrOfIndices } from '@utils/base/array/ArrayU.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { ChatItemA } from 'src/models/api/ChatItemA.ts'
@@ -232,14 +232,14 @@ const ChatsPage = React.memo(() => {
   //
   //
   // const pinChats = useCallback((ids: string[]) => {
-  //   setChatItems(items => ArrayU.mapToIf(items, it => {
+  //   setChatItems(items => arrMapToIf(items, it => {
   //     // TODO add pinned as lowermost and adjust all indexes
   //     if (ids.includes(it.id) && isundef(it.pinned)) return { ...it, pinned: 1 }
   //     return it
   //   }))
   // }, [])
   // const unpinChats = useCallback((ids: string[]) => {
-  //   setChatItems(items => ArrayU.mapToIf(items, it => {
+  //   setChatItems(items => arrMapToIf(items, it => {
   //     // TODO add pinned as lowermost and adjust all indexes
   //     if (ids.includes(it.id) && isdef(it.pinned)) return { ...it, pinned: undefined }
   //     return it
@@ -247,13 +247,13 @@ const ChatsPage = React.memo(() => {
   // }, [])
   //
   // const muteChats = useCallback((ids: string[], { forever = false, period = 0 /*ms*/ } = { }) => {
-  //   setChatItems(items => ArrayU.mapToIf(items, it => {
+  //   setChatItems(items => arrMapToIf(items, it => {
   //     if (ids.includes(it.id) && !it.mute) return { ...it, mute: true }
   //     return it
   //   }))
   // }, [])
   // const unmuteChats = useCallback((ids: string[]) => {
-  //   setChatItems(items => ArrayU.mapToIf(items, it => {
+  //   setChatItems(items => arrMapToIf(items, it => {
   //     if (ids.includes(it.id) && it.mute) return { ...it, mute: false }
   //     return it
   //   }))

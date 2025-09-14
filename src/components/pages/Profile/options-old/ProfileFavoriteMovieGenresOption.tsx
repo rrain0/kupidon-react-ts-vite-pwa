@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import FilmGradIc from 'src/components/elems/icons/GradSvgIcons/pack/special/FilmGradIc.tsx'
-import ModalMultiSelectList from 'src/components/widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
+import ModalMultiSelectList
+  from 'src/components/widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
 import {
   useMultiSelectOneEditableOption
 } from 'src/components/widgets/modals/ModalMultiSelectList/useMultiSelectOneEditableOption'
@@ -9,7 +10,7 @@ import { OptionUiText } from 'src/locales/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
-import { ArrayU } from '@utils/base/ArrayU'
+import { arrToggleTo } from '@utils/base/array/ArrayU.ts'
 
 
 
@@ -70,7 +71,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
     
     const [selected, setSelected] = useState([] as string[])
     
-    const onSelect = (id: string) => setSelected(ArrayU.toggleTo(selected, id))
+    const onSelect = (id: string) => setSelected(arrToggleTo(selected, id))
     const onClear = () => setSelected([])
     
     

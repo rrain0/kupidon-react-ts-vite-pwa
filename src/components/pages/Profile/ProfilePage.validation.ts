@@ -10,7 +10,7 @@ import {
 } from 'src/components/pages/Profile/options-filter/ProfileImLookingForOption.tsx'
 import { JobOptionValues } from 'src/components/pages/Profile/options/ProfileJobOption.tsx'
 import { ErrorUiText } from 'src/locales/translations/ErrorUiText.ts'
-import { ArrayU, arrOfIndices } from '@utils/base/ArrayU.ts'
+import { arrOfIndices } from '@utils/base/array/ArrayU.ts'
 import { DateTime } from '@utils/date/DateTime.ts'
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import { UiTextValues } from '@libs/ui-text/UiText.ts'

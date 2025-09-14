@@ -1,4 +1,4 @@
-import { ArrayU } from 'src/utils/base/ArrayU.ts'
+import { arrMapToIf } from 'src/utils/base/array/ArrayU.ts'
 import React, { useEffect, useState } from 'react'
 import {
   mergeMediaDownloadData
@@ -34,7 +34,7 @@ export const MediaArrayDownloader = ReactU.memo(<T extends MediaDownloadable | u
   const [mediasToDownload, setMediasToDownload] = useState<T[] | undefined>(undefined)
   
   useEffect(() => {
-    setMediasToDownload(mediasToDownload => ArrayU.mapToIf(medias, m => {
+    setMediasToDownload(mediasToDownload => arrMapToIf(medias, m => {
       const mediaToDownload = mediasToDownload?.find(mToDownload => (
         mToDownload && m && mToDownload.remoteUrl === m.remoteUrl
       ))

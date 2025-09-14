@@ -1,8 +1,6 @@
 import { useAutoRetry } from 'src/utils/react/useAutoRetry.ts'
-import { ArrayU } from 'src/utils/base/ArrayU.ts'
-
+import { arrMapToIf } from 'src/utils/base/array/ArrayU.ts'
 import { MediaDownloadable } from '@libs/media/Media.ts'
-import mapToIf = ArrayU.mapToIf
 import { SetterOrUpdater } from 'src/utils/base/typeUtils.ts'
 
 
@@ -11,7 +9,7 @@ export const useMediaArrayDownloadAutoRetry = <T extends MediaDownloadable | und
   medias: T[] | undefined, setMedias: SetterOrUpdater<T[] | undefined>,
 ) => {
   const retry = () => {
-    setMedias(medias => mapToIf(medias, m => {
+    setMedias(medias => arrMapToIf(medias, m => {
       if (m?.needRetryDownload) {
         return {
           ...m,

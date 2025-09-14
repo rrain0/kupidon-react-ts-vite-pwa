@@ -1,4 +1,4 @@
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { arrRemove } from '@utils/base/array/ArrayU.ts'
 import React, { useEffect } from 'react'
 import { useAppZustand } from 'src/zustand/app/appZustand.ts'
 
@@ -62,7 +62,7 @@ const addPageStateListener = (onPageState: OnPageState) => {
   pageStateListeners.push(onPageState)
 }
 const removePageStateListener = (onPageState: OnPageState) => {
-  ArrayU.remove(pageStateListeners, onPageState)
+  arrRemove(pageStateListeners, onPageState)
 }
 
 

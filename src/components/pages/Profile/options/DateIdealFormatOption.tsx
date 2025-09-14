@@ -7,7 +7,7 @@ import { OptionUiText } from 'src/locales/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
 import ModalMultiSelectList from 'src/components/widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
-import { ArrayU } from '@utils/base/ArrayU'
+import { arrToggleTo } from '@utils/base/array/ArrayU.ts'
 
 
 
@@ -58,7 +58,7 @@ const DateIdealFormatOption = React.memo(
     const [saved, setSaved] = useState<string[]>([])
     const [selected, setSelected] = useState<string[]>(saved)
     
-    const onSelect = (id: string) => setSelected(ArrayU.toggleTo(selected, id))
+    const onSelect = (id: string) => setSelected(arrToggleTo(selected, id))
     const onClear = () => setSelected([])
     const onCancel = () => setSelected(saved)
     

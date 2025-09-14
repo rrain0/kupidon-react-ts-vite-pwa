@@ -34,7 +34,7 @@ import ProfileCardsFullInfo from 'src/components/widgets/ProfileCards/ProfileCar
 import ProfileCardsInfoOverlay
   from 'src/components/widgets/ProfileCards/ProfileCardsInfoOverlay.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { arrOfIndices, arrRandom } from '@utils/base/ArrayU'
+import { arrOfIndices, arrRandom } from '@utils/base/array/ArrayU.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import Txt = EmotionCommon.Txt
 import flexC = EmotionCommon.flexC

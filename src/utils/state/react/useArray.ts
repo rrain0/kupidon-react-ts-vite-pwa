@@ -1,9 +1,10 @@
 import { useCallback, useState } from 'react'
-import { ArrayU, arrHas } from 'src/utils/base/ArrayU.ts'
+import {
+  ArrFilter, arrFilterToIf, arrHas, arrAddUniqToIf, arrToggleTo, arrRemoveToIf
+} from 'src/utils/base/array/ArrayU.ts'
 import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
 import { useAsRefGet } from 'src/utils/state/react/base/useAsRefGet.ts'
 import { ValueOrProducer } from 'src/utils/base/typeUtils.ts'
-import { ArrFilter } from 'src/utils/base/typeUtils.ts'
 
 
 
@@ -18,16 +19,16 @@ export const useArray = <T>(initialValue?: ValueOrProducer<T[]>) => {
     return arrHas(arr, elem)
   })
   const add = useCallback((elem: T) => {
-    setArr(arr => ArrayU.addUniqToIf(arr, elem))
+    setArr(arr => arrAddUniqToIf(arr, elem))
   }, [])
   const remove = useCallback((elem: T) => {
-    setArr(arr => ArrayU.removeToIf(arr, elem))
+    setArr(arr => arrRemoveToIf(arr, elem))
   }, [])
   const toggle = useCallback((elem: T) => {
-    setArr(arr => ArrayU.toggleTo(arr, elem))
+    setArr(arr => arrToggleTo(arr, elem))
   }, [])
   const filter = useCallback((filter: ArrFilter<T>) => {
-    setArr(arr => ArrayU.filterToIf(arr, filter))
+    setArr(arr => arrFilterToIf(arr, filter))
   }, [])
   const clear = useCallback(() => {
     setArr([])

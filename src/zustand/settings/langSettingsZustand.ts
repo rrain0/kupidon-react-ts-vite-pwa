@@ -1,4 +1,4 @@
-import { NonEmptyArr } from '@utils/base/ArrayU.ts'
+import { NonEmptyArr } from '@utils/base/array/arrayMoreUtils.ts'
 import { Lang } from '@utils/app/lang/Lang.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'

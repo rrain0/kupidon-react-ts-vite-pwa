@@ -1,7 +1,48 @@
-import { lastI } from 'src/utils/base/ArrayU.ts'
-import { emptyval, Sign } from 'src/utils/base/typeUtils.ts'
+import { lastI } from 'src/utils/base/array/ArrayU.ts'
+import { emptyval, type Nonemptyval, Sign } from 'src/utils/base/typeUtils.ts'
 
 
+
+export type Arraify<T> = T extends readonly any[] ? T : T[]
+
+export const arraify = <T>(value: T): Arraify<T> => {
+  //@ts-expect-error
+  return isArray(value) ? value : [value]
+}
+
+
+
+
+export type NonEmptyArr<T> = [T, ...T[]]
+
+export const arrIsNonEmpty = <T>(
+  arr?: T[] | NonEmptyArr<T> | emptyval
+): arr is NonEmptyArr<T> => (
+  (arr?.length ?? 0) > 0
+)
+
+export type ArrayOfNonempties<A extends Array<any>> = (
+  A extends Array<infer E> ? Array<Nonemptyval<E>> : never
+)
+
+
+
+
+export type ArrFirstOptional<A extends readonly any[]> = (
+  A extends readonly [first?: infer F, ...infer R] ? [first?: F, ...R] : never
+)
+
+
+
+export const arrNextOr = <T1, T2>(
+  arr: readonly T1[],
+  curr: T1,
+  orElse: T2
+): T1 | T2 => {
+  const currIdx = arr.findIndex(it => it === curr)
+  if (currIdx === -1 || currIdx + 1 === arr.length) return orElse
+  return arr[currIdx + 1]
+}
 
 
 

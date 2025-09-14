@@ -1,4 +1,4 @@
-import { ArrayU, ArrElem } from 'src/utils/base/ArrayU.ts'
+import { arrDistinctToIf, ArrElem } from 'src/utils/base/array/ArrayU.ts'
 
 
 
@@ -24,7 +24,7 @@ export namespace Lang {
     let matchedLangs = systemLangs
       .map(it => Lang.langToFullLang[it] ?? Lang.langToFullLang[it.substring(0, 2)] ?? it)
       .filter(it => Lang.AllSupported.includes(it)) as Lang.Supported[]
-    matchedLangs = ArrayU.distinctToIf(matchedLangs)
+    matchedLangs = arrDistinctToIf(matchedLangs)
     return matchedLangs
   }
   

@@ -1,5 +1,5 @@
 import { Lang } from '@utils/app/lang/Lang.ts'
-import { NonEmptyArr } from '@utils/base/ArrayU.ts'
+import { NonEmptyArr } from '@utils/base/array/arrayMoreUtils.ts'
 
 
 

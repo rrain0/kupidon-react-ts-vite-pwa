@@ -10,10 +10,10 @@ import {
 } from '@libs/media/Media.ts'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { arrMapOneToIf } from '@utils/base/array/ArrayU.ts'
+import { arrMergeTo, diff2 } from '@utils/base/array/arrayDiffUtils.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { AuthZustand } from 'src/zustand/auth/authZustand.ts'
-import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import FormValues = ProfilePageValidation.FormValues
 import AddProfilePhotoErrorData = UserApi.AddProfilePhotoErrorData
 import UpdateUserErrorData = UserApi.UpdateUserErrorData
@@ -23,7 +23,6 @@ import photosComparator = ProfilePageValidation.photosComparator
 import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
 import UserToUpdate = UserApi.UserToUpdate
 import AddProfilePhoto = UserApi.profilePhotoToAdd
-import findBy = ArrayU.findBy
 
 
 
@@ -52,7 +51,7 @@ export const profileUpdateApiRequest = (
   
   if (!failedFields.includes('photos')) {
     const [fwd] =
-      ArrayU.diff2(values.initialValues.photos, values.photos, photosComparator)
+      diff2(values.initialValues.photos, values.photos, photosComparator)
     userToUpdate.photos = {
       remove: fwd
         .filter(it => it.isRemoved && it.fromElem.type === 'remote')
@@ -83,7 +82,7 @@ export const profileUpdateApiRequest = (
       id: it.id,
     }))
     setFormValues(s => ({ ...s,
-      photos: ArrayU.combine(
+      photos: arrMergeTo(
         s.photos, uploads,
         (photo, upload) => ({ ...photo, upload } satisfies MediaInArrayDUC),
         (photo, upload) => photo.id === upload.id
@@ -95,7 +94,7 @@ export const profileUpdateApiRequest = (
       updateForPhoto?: Partial<MediaInArrayDUC>,
     ) => {
       setFormValues(s => ({ ...s,
-        photos: mapFirstToIfFoundBy({
+        photos: arrMapOneToIf({
           arr: s.photos,
           filter: elem => elem.upload?.id === updateForUpload.id,
           mapper: elem => ({
@@ -112,7 +111,7 @@ export const profileUpdateApiRequest = (
     const applyUpdatedUser = () => {
       clearTimeout(delayShowUploadTimerId)
       setFormValues(s => ({ ...s,
-        photos: ArrayU.combine(
+        photos: arrMergeTo(
           s.photos, uploads,
           (photo, upload) => (
             { ...photo, upload: undefined } satisfies MediaInArrayDUC
@@ -124,7 +123,7 @@ export const profileUpdateApiRequest = (
       if (u) {
         // работает при условии, что во время обновления другой клиент не обновит фотки
         setFormValues(s => ({ ...s,
-          photos: ArrayU.combine(
+          photos: arrMergeTo(
             s.photos, values.photos,
             (photo, usedPhoto) => ({
               ...photo,
@@ -135,7 +134,7 @@ export const profileUpdateApiRequest = (
           ),
         }))
         setFormValues(s => ({ ...s,
-          photos: ArrayU.combine(
+          photos: arrMergeTo(
             s.photos, values.photos,
             (photo, usedPhoto, photoI, usedPhotoI) => ({
               ...photo, remoteI: usedPhotoI,
@@ -160,7 +159,7 @@ export const profileUpdateApiRequest = (
     
     // TODO Photos - think about how to abort upload
     for (const photo of addPhotos) {
-      const getUpload = () => findBy(uploads, elem => elem.id === photo.id).elem
+      const getUpload = () => uploads.find(elem => elem.id === photo.id)
       
       const abortCtrl = new AbortController()
       const uploadStart = {
@@ -171,7 +170,7 @@ export const profileUpdateApiRequest = (
       } satisfies Partial<MediaInArrayDUC>
       
       setFormValues(form => ({ ...form,
-        photos: mapFirstToIfFoundBy({
+        photos: arrMapOneToIf({
           arr: form.photos,
           filter: photo => photo.upload?.id === uploadStart.upload.id,
           mapper: photo => ({ ...photo, ...uploadStart }),
@@ -185,7 +184,7 @@ export const profileUpdateApiRequest = (
       ) => {
         const upload = getUpload()
         if (upload) setFormValues(form => ({ ...form,
-          photos: mapFirstToIfFoundBy({
+          photos: arrMapOneToIf({
             arr: form.photos,
             filter: photo => photo.upload?.id === upload.id,
             mapper: photo => ({ ...photo,

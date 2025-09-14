@@ -8,9 +8,8 @@ import DialogButtons from 'src/components/widgets/modals/DialogButtons'
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomSheetState'
 import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomSheetBasic.tsx'
-import { ArrayU } from '@utils/base/ArrayU'
+import { arrToggleTo } from '@utils/base/array/ArrayU.ts'
 import { ReactU } from 'src/utils/react/ReactU'
-
 import { Cb } from '@utils/base/typeUtils.ts'
 import { Setter } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
@@ -62,7 +61,7 @@ const ModalTileSelect = ReactU.memo(
     
     
     const toggleSelected = (id: T) => {
-      setSelected?.(ArrayU.toggleTo(selected, id))
+      setSelected?.(arrToggleTo(selected, id))
     }
     
     

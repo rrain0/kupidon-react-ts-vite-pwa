@@ -1,5 +1,4 @@
 import { css } from '@emotion/react'
-import { ValOrArr } from '@utils/base/ArrayU.ts'
 import { objectMap } from '@utils/base/ObjectU.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { isObject } from '@utils/base/typeUtils.ts'
@@ -754,6 +753,7 @@ export namespace WidgetStyle0 {
   }
   
   
+  export type ValOrArr<T> = T | T[]
   export type ElemStateDescriptor<S extends string>
     = Record<S, ValOrArr<Pseudo0 | DataAttr<any>>>
   

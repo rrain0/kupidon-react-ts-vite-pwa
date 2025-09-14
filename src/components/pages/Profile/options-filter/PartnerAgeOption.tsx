@@ -1,4 +1,4 @@
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { mergeMappedIf } from '@utils/base/array/arrayDiffUtils.ts'
 import HourglassGradIc
   from 'src/components/elems/icons/GradSvgIcons/pack/special/HourglassGradIc.tsx'
 import { useStateMapperSync } from '@utils/state/react/useStateMapperSync.ts'
@@ -68,11 +68,11 @@ const PartnerAgeOption = React.memo(() => {
   useStateMapperSync(
     ageRange, widgetRange,
     setAgeRange, setWidgetRange,
-    (w, h) => ArrayU.mergeMappedIf(
+    (w, h) => mergeMappedIf(
       h, w,
       mapWidgetRangeToDataRange(w), mapDataRangeToWidgetRange(h)
     ),
-    (h, w) => ArrayU.mergeMappedIf(
+    (h, w) => mergeMappedIf(
       w, h,
       mapDataRangeToWidgetRange(h), mapWidgetRangeToDataRange(w)
     )

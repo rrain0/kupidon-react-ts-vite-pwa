@@ -9,7 +9,7 @@ import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useO
 import { OptionUiText } from 'src/locales/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
-import { ArrayU } from '@utils/base/ArrayU'
+import { arrToggleTo, arrRemoveToIf } from '@utils/base/array/ArrayU.ts'
 import ModalMultiSelectList from 'src/components/widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
 
 
@@ -69,8 +69,8 @@ const DateIdealTimeOption = React.memo(
     
     const onSelect = (id: string) => {
       if (id !== options[4].id) {
-        const newSelected = ArrayU.toggleTo(
-          ArrayU.removeToIf(selected, options[4].id),
+        const newSelected = arrToggleTo(
+          arrRemoveToIf(selected, options[4].id),
           id
         )
         setSelected(newSelected)

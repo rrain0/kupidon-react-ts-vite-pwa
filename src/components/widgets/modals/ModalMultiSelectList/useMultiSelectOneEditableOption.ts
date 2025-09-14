@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Option } from 'src/models/ui/Option.ts'
-import { ArrayU } from '@utils/base/ArrayU'
-
+import { arrAddUniqToIf, arrRemoveToIf } from '@utils/base/array/ArrayU.ts'
 import { Setter } from '@utils/base/typeUtils.ts'
 
 
@@ -33,8 +32,8 @@ export const useMultiSelectOneEditableOption = <T extends string>(
     const { id, text: t } = opt
     if (id === editableOptionId) {
       setCustomOptionText(t)
-      if (t) setSelected(ArrayU.addUniqToIf(selected, id))
-      else setSelected(ArrayU.removeToIf(selected, id))
+      if (t) setSelected(arrAddUniqToIf(selected, id))
+      else setSelected(arrRemoveToIf(selected, id))
     }
   }, [editableOptionId, selected])
   
