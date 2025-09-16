@@ -1,4 +1,4 @@
-import { arrDistinctToIf, ArrElem } from 'src/utils/base/array/ArrayU.ts'
+import { arrDistinctToIf, ArrElem } from 'src/utils/base/array/arrayUtils.ts'
 
 
 

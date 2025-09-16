@@ -1,20 +1,17 @@
-import { emptyval, isundef } from 'src/utils/base/typeUtils.ts'
+import { emptyval } from 'src/utils/base/typeUtils.ts'
 import { ComparatorEq } from 'src/utils/base/typeUtils.ts'
 import { defaultComparatorEq } from 'src/utils/base/typeUtils.ts'
 import { defaultFilter } from 'src/utils/base/typeUtils.ts'
-import { Mapper } from 'src/utils/base/typeUtils.ts'
 import { Filter } from 'src/utils/base/typeUtils.ts'
-import { MergerIndexed } from 'src/utils/base/typeUtils.ts'
-import { CombinerIndexed } from 'src/utils/base/typeUtils.ts'
-import { Nonemptyval } from 'src/utils/base/typeUtils.ts'
 import { isArray } from 'src/utils/base/typeUtils.ts'
-import { isdef } from 'src/utils/base/typeUtils.ts'
 
 
 
 export type ArrElem<ArrayType extends readonly unknown[]> = (
   ArrayType extends readonly (infer ElementType)[] ? ElementType : never
 )
+export type ArrMapper<In, Out = In> = (v: In, i: number, arr: In[]) => Out
+export type ArrFilter<T> = (v: T, i: number, arr: T[]) => any
 
 
 
@@ -121,11 +118,37 @@ export const arrAddUniqToIf = <T>(arr: T[], elem: T): T[] => {
 export const arrReplaceOneToIfBy = <T>(
   arr: T[],
   elem: NoInfer<T>,
-  filter: Filter<NoInfer<T>> = defaultFilter
+  filter: ArrFilter<NoInfer<T>> = defaultFilter,
 ): T[] => {
   const i = arr.findIndex(filter)
   if (i === -1) return arr
   return [...arr.slice(0, i), elem, ...arr.slice(i + 1)]
+}
+
+export const arrMapOneIfBy = <T>(
+  arr: T[],
+  filter: ArrFilter<NoInfer<T>>,
+  mapper: ArrMapper<NoInfer<T>, T>,
+): T[] => {
+  const i = arr.findIndex(filter)
+  if (i === -1) return arr
+  const elem = arr[i]
+  const newElem = mapper(elem, arr.length, arr)
+  if (elem === newElem) return arr
+  return arr.toSpliced(i, 1, newElem)
+}
+
+export const arrMapOneToEndOrAddToIfBy = <T>(
+  arr: T[],
+  filter: ArrFilter<NoInfer<T>>,
+  mapper: ArrMapper<NoInfer<T> | undefined, T>,
+): T[] => {
+  const i = arr.findIndex(filter)
+  if (i === -1) return [...arr, mapper(undefined, arr.length, arr)]
+  const elem = arr[i]
+  const newElem = mapper(elem, arr.length, arr)
+  if (elem === newElem) return arr
+  return [...arr.slice(0, i), ...arr.slice(i + 1), newElem]
 }
 
 export const arrToggleTo = <T>(arr: T[], elem: T): T[] => {
@@ -171,8 +194,6 @@ export const arrRemoveByToIf = <T>(arr: T[], filter: ArrFilter<T>): T[] => {
 
 
 
-export type ArrMapper<In, Out = In> = (v: In, i: number, arr: In[]) => Out
-export type ArrFilter<T> = (v: T, i: number, arr: T[]) => any
 
 export function arrMapOneToIf<In, Out = In>(params: {
   arr: In[], filter: Filter<NoInfer<In>>, mapper: ArrMapper<In, Out>

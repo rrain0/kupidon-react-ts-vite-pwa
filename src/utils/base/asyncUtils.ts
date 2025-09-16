@@ -1,5 +1,4 @@
-import { CbN } from 'src/utils/base/typeUtils.ts'
-import { Cb } from 'src/utils/base/typeUtils.ts'
+import { type Cb, type CbN, isemptyval, isnonemptyval } from 'src/utils/base/typeUtils.ts'
 
 
 
@@ -43,17 +42,17 @@ export const withThrottle = <Args extends any[]>(
   interval: number,
   callback: CbN<Args>
 ): CbN<Args> => {
-  let timerId: NodeJS.Timeout | null = null
+  let timerId
   let prev = 0
   
   const throttledCallback: (...args: Args) => void = (...args) => {
     const now = +new Date()
-    if (timerId === null && (now - prev > interval)) {
+    if (isemptyval(timerId) && (now - prev > interval)) {
       prev = +new Date()
       callback(...args)
     }
     else {
-      if (timerId !== null) clearTimeout(timerId)
+      if (isnonemptyval(timerId)) clearTimeout(timerId)
       timerId = setTimeout(() => {
         timerId = null
         prev = +new Date()

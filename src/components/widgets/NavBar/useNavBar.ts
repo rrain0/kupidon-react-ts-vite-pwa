@@ -1,4 +1,4 @@
-import { arrRemove } from '@utils/base/array/ArrayU.ts'
+import { arrRemove } from '@utils/base/array/arrayUtils.ts'
 import { useEffect, useId, useMemo, useState, useTransition } from 'react'
 import { NavBarPlace } from 'src/components/widgets/NavBar/NavBar.tsx'
 import { navStack } from 'src/components/widgets/NavBar/navStack.ts'

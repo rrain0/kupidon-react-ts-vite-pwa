@@ -10,7 +10,7 @@ import {
 } from '@libs/media/Media.ts'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
-import { arrMapOneToIf } from '@utils/base/array/ArrayU.ts'
+import { arrMapOneToIf } from '@utils/base/array/arrayUtils.ts'
 import { arrMergeTo, diff2 } from '@utils/base/array/arrayDiffUtils.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { AuthZustand } from 'src/zustand/auth/authZustand.ts'

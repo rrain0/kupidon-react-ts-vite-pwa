@@ -1,30 +1,18 @@
 import React from 'react'
-import { ReactU } from '@utils/react/ReactU.ts'
-
-import Children = ReactU.Children
-import { Pu } from '@utils/base/typeUtils.ts'
-import ClassStyle = ReactU.ClassStyle
 
 
 
-
-export type MyComponentProps = Pu<{
-  prop: number
-}> & ClassStyle & Children
+export type MyComponentProps = {
+  prop: string
+}
 
 const MyComponent = React.memo((props: MyComponentProps) => {
-  const {
-    className, style, children,
-    prop = 0,
-  } = props
+  const { prop } = props
   
   return (
     <div
       data-display-name='MyComponent'
-      className={className}
-      style={style}
     >
-      {children}
     </div>
   )
 })

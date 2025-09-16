@@ -1,4 +1,4 @@
-import { arrOfUndef } from 'src/utils/base/array/ArrayU.ts'
+import { arrOfUndef } from 'src/utils/base/array/arrayUtils.ts'
 import {
   type CombinerIndexed,
   type ComparatorEq,

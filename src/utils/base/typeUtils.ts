@@ -92,10 +92,10 @@ export function isnull<T>(value: T | null): value is null {
   return value === null
 }
 // Value is not null
-export function nonnull<T>(value: T | null): value is T {
+export function isnonnull<T>(value: T | null): value is T {
   return value !== null
 }
-export function nonemptyval<E extends {}, T>(value: T | E): value is E {
+export function isnonemptyval<E extends {}, T>(value: T | E): value is E {
   return value !== null && value !== undefined
 }
 export function isemptyval<NE extends emptyval, T>(value: T | NE): value is NE {

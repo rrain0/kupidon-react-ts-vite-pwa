@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useState } from 'react'
 import { themeByName } from 'src/styles/themes/ThemesCollection.ts'
 import { useAppTheme } from 'src/utils/app/theme/useAppTheme.ts'
 import { useSetAppTheme } from 'src/utils/app/theme/useSetAppTheme.ts'
-import { useSystemTheme } from 'src/utils/react/system/useSystemTheme.ts'
+import { useSystemTheme } from 'src/utils/system/react/useSystemTheme.ts'
 import { useThemeSettingsZustand } from 'src/zustand/settings/themeSettingsZustand.ts'
 
 

@@ -9,7 +9,7 @@ import {
 } from '@utils/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
-import { arrOfIndices, arrMapOneToIf } from '@utils/base/array/ArrayU.ts'
+import { arrOfIndices, arrMapOneToIf } from '@utils/base/array/arrayUtils.ts'
 import { diff2, arrMergeTo } from '@utils/base/array/arrayDiffUtils.ts'
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import { random } from '@utils/base/math/randomUtils.ts'

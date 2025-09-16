@@ -1,4 +1,4 @@
-import { arrEq } from 'src/utils/base/array/ArrayU.ts'
+import { arrEq } from 'src/utils/base/array/arrayUtils.ts'
 import { SelectPropValueTf5 } from '@libs/widget-style-6/transform/WidgetStyleTransform5.ts'
 
 

@@ -4,7 +4,7 @@ import { MbtiType } from 'src/models/MbtiType.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { isobject } from '@utils/base/typeUtils.ts'
-import { nonemptyval } from '@utils/base/typeUtils.ts'
+import { isnonemptyval } from '@utils/base/typeUtils.ts'
 import { isemptyval } from '@utils/base/typeUtils.ts'
 import { Getter } from '@utils/base/typeUtils.ts'
 
@@ -16,7 +16,7 @@ const zustandLsName = 'zustandMbti'
 
 const recoilLsName = 'test-mbti'
 // To trigger Zustand update from Recoil to Zustand
-if (isemptyval(localStorage.getItem(zustandLsName)) && nonemptyval(recoilLsName)) {
+if (isemptyval(localStorage.getItem(zustandLsName)) && isnonemptyval(recoilLsName)) {
   localStorage.setItem(zustandLsName, JSON.stringify({ version: -1 }))
 }
 
@@ -123,7 +123,7 @@ export const useMbtiZustand = create<MbtiZustand>()(persist(
       if (persistedVersion <= 0) {
         const oldRaw = localStorage.getItem(recoilLsName)
         localStorage.removeItem(recoilLsName)
-        const old = nonemptyval(oldRaw) ? JSON.parse(oldRaw) : undefined
+        const old = isnonemptyval(oldRaw) ? JSON.parse(oldRaw) : undefined
         ;(persisted ??= { }).answers = []
         if (isobject(old)) {
           persisted.answers = old.answers

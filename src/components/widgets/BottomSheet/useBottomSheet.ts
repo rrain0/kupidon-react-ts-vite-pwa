@@ -7,14 +7,14 @@ import React, {
   useMemo, useRef,
   useState,
 } from 'react'
-import { lastI } from '@utils/base/array/ArrayU.ts'
+import { lastI } from '@utils/base/array/arrayUtils.ts'
 import { ViewProps } from 'src/utils/view/ViewProps.ts'
 import { rangeClamp, rangeHas } from '@utils/base/math/rangeUtils.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { CssValue, parseCssStringValue } from '@utils/css/cssParserUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { Setter } from '@utils/base/typeUtils.ts'
-import { nonemptyval } from '@utils/base/typeUtils.ts'
+import { isnonemptyval } from '@utils/base/typeUtils.ts'
 import { Cb } from '@utils/base/typeUtils.ts'
 import { isemptyval } from '@utils/base/typeUtils.ts'
 import { Defined } from '@utils/base/typeUtils.ts'
@@ -272,7 +272,7 @@ export const useBottomSheet = (
   const reactOnState = () => {
     if (!isReady) return
     
-    const canOpen = nonemptyval(realDefaultOpenIdx)
+    const canOpen = isnonemptyval(realDefaultOpenIdx)
     const canClose = newCloseable
     
     const currState = prevState

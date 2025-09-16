@@ -39,7 +39,7 @@ import {
   arrReplaceOneToIfBy,
   arrMapOneToIf,
   arrHasAny,
-} from '@utils/base/array/ArrayU.ts'
+} from '@utils/base/array/arrayUtils.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { blobToDataUrl } from '@utils/bin/binDataUtils.ts'
@@ -651,7 +651,7 @@ const onFilesSelectedBuilder = (
             }
             setImages(images => arrReplaceOneToIfBy(images,
               newPhoto,
-              elem => elem.conversion?.id === compressionStart.conversion.id
+              elem => elem.conversion?.id === compressionStart.conversion.id,
             ))
           }
           catch (ex) {

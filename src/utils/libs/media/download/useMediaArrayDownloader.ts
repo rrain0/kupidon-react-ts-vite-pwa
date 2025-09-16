@@ -1,4 +1,4 @@
-import { arrMapToIf } from 'src/utils/base/array/ArrayU.ts'
+import { arrMapToIf } from 'src/utils/base/array/arrayUtils.ts'
 import { useTimeout } from '@utils/react/useTimeout.ts'
 import { useEffect, useState } from 'react'
 import { getMediaUiState, MediaDownloadable } from '@libs/media/Media.ts'

@@ -1,4 +1,4 @@
-import { arrMapToIf, arrMapOneToIf } from 'src/utils/base/array/ArrayU.ts'
+import { arrMapToIf, arrMapOneToIf } from 'src/utils/base/array/arrayUtils.ts'
 import { withThrottle } from 'src/utils/base/asyncUtils.ts'
 import { random } from 'src/utils/base/math/randomUtils.ts'
 import { fetchToBlob, blobToDataUrl } from 'src/utils/bin/binDataUtils.ts'
