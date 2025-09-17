@@ -1,9 +1,9 @@
-import { emptyval } from 'src/utils/base/typeUtils.ts'
-import { ComparatorEq } from 'src/utils/base/typeUtils.ts'
-import { defaultComparatorEq } from 'src/utils/base/typeUtils.ts'
-import { defaultFilter } from 'src/utils/base/typeUtils.ts'
-import { Filter } from 'src/utils/base/typeUtils.ts'
-import { isArray } from 'src/utils/base/typeUtils.ts'
+import {
+  type ComparatorEq,
+  defaultComparatorEq, defaultFilter,
+  type emptyval, type Filter,
+  isArray, isundef,
+} from 'src/utils/base/typeUtils.ts'
 
 
 
@@ -134,6 +134,20 @@ export const arrMapOneIfBy = <T>(
   if (i === -1) return arr
   const elem = arr[i]
   const newElem = mapper(elem, arr.length, arr)
+  if (elem === newElem) return arr
+  return arr.toSpliced(i, 1, newElem)
+}
+
+export const arrMapOrRemoveOneIfBy = <T>(
+  arr: T[],
+  filter: ArrFilter<NoInfer<T>>,
+  mapper: ArrMapper<NoInfer<T>, T | undefined>,
+): T[] => {
+  const i = arr.findIndex(filter)
+  if (i === -1) return arr
+  const elem = arr[i]
+  const newElem = mapper(elem, arr.length, arr)
+  if (isundef(newElem)) return arr.toSpliced(i, 1)
   if (elem === newElem) return arr
   return arr.toSpliced(i, 1, newElem)
 }

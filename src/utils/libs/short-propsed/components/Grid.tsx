@@ -8,7 +8,7 @@ import React from 'react'
 
 
 
-export type GridProps = React.ComponentProps<typeof GridBox> & GridViewShortProps
+export type GridProps = React.ComponentProps<typeof GridDiv> & GridViewShortProps
 
 const Grid = React.memo((props: GridProps) => {
   
@@ -18,7 +18,7 @@ const Grid = React.memo((props: GridProps) => {
   const gridStyleClassName = 'gridStyle'
   
   return (
-    <GridBox
+    <GridDiv
       data-display-name='Grid'
       {...restProps}
       css={{
@@ -27,7 +27,7 @@ const Grid = React.memo((props: GridProps) => {
       className={clsx(className, gridStyleClassName)}
     >
       {children}
-    </GridBox>
+    </GridDiv>
   )
 })
 Grid.displayName = 'Grid'
@@ -35,4 +35,4 @@ export default Grid
 
 
 
-const GridBox = styled.div({ display: 'grid' })
+const GridDiv = styled.div({ display: 'grid' })

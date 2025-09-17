@@ -10,7 +10,7 @@ import React, {
 import { lastI } from '@utils/base/array/arrayUtils.ts'
 import { ViewProps } from 'src/utils/view/ViewProps.ts'
 import { rangeClamp, rangeHas } from '@utils/base/math/rangeUtils.ts'
-import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
+import { useNoSelect } from '@utils/move/pointer/useNoSelect.ts'
 import { CssValue, parseCssStringValue } from '@utils/css/cssParserUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { Setter } from '@utils/base/typeUtils.ts'

@@ -8,7 +8,7 @@ import React from 'react'
 
 
 
-export type FlexProps = React.ComponentProps<typeof FlexBox> & FlexViewShortProps
+export type FlexProps = React.ComponentProps<typeof FlexDiv> & FlexViewShortProps
 
 const Flex = React.memo((props: FlexProps) => {
   
@@ -18,7 +18,7 @@ const Flex = React.memo((props: FlexProps) => {
   const flexStyleClassName = 'flexStyle'
   
   return (
-    <FlexBox
+    <FlexDiv
       data-display-name='Flex'
       {...restProps}
       css={{
@@ -27,7 +27,7 @@ const Flex = React.memo((props: FlexProps) => {
       className={clsx(className, flexStyleClassName)}
     >
       {children}
-    </FlexBox>
+    </FlexDiv>
   )
 })
 Flex.displayName = 'Flex'
@@ -35,4 +35,4 @@ export default Flex
 
 
 
-const FlexBox = styled.div({ display: 'flex' })
+const FlexDiv = styled.div({ display: 'flex' })

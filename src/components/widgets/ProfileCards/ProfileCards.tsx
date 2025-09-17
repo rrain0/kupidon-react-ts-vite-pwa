@@ -5,14 +5,13 @@ import styled from '@emotion/styled'
 import {
   defaultCarouselMergeProgress,
   getLoopedCarouselProps,
-} from '@utils/animated/carousel/props/defaultCarouselProps.ts'
-import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
-import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
-
+} from '@utils/move/animated/carousel/props/defaultCarouselProps.ts'
+import { createTrackPropsGetter } from '@utils/move/animated/carousel/createTrackPropsGetter.ts'
+import { useCarousel } from '@utils/move/animated/carousel/useCarousel.ts'
+import { cssjsClampRatio } from '@utils/css/cssUtils.ts'
 import { useBool } from '@utils/state/react/base/useBool.ts'
 import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
-import { ViewU } from '@utils/view/ViewU.ts'
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText'
@@ -281,7 +280,7 @@ export const ProfileCards = React.memo((props: ProfileCardsProps) => {
     if (frame) {
       const props = getViewProps(frame)
       const { w, h } = props
-      const { w: photosW, h: photosH } = ViewU.clampRatio({
+      const { w: photosW, h: photosH } = cssjsClampRatio({
         minRatio: minRatioPort,
         maxRatio: maxRatioPort,
         w: w - ph * 2,

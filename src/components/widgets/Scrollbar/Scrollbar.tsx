@@ -9,7 +9,7 @@ import React, {
 import clsx from 'clsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { rangeClamp, rangeHas } from '@utils/base/math/rangeUtils.ts'
-import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
+import { useNoSelect } from '@utils/move/pointer/useNoSelect.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { ScrollbarStyle } from 'src/components/widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps } from 'src/components/widgets/Scrollbar/useContainerScrollState.ts'

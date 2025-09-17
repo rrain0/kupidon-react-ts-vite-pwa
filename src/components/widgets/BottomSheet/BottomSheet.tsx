@@ -4,7 +4,7 @@ import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { useClick } from '@utils/app/gestures/useClick.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import clsx from 'clsx'
-import { useUpNodesScrollLock } from '@utils/gestures/pointer/useUpNodesScrollLock.ts'
+import { useUpNodesScrollLock } from '@utils/move/pointer/useUpNodesScrollLock.ts'
 import { BottomSheetS6 } from 'src/components/widgets/BottomSheet/BottomSheetS6.ts'
 import {
   ComputedBottomSheetDimens,

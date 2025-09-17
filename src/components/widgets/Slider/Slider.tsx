@@ -11,7 +11,7 @@ import {
 } from '@utils/base/math/rangeUtils.ts'
 import { useAsRefGet } from '@utils/state/react/base/useAsRefGet.ts'
 import { useSkipRepaintAfterMount } from '@utils/react/useSkipRepaintAfterMount.ts'
-import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
+import { useNoSelect } from '@utils/move/pointer/useNoSelect.ts'
 import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useLayoutEffect, useState } from 'react'

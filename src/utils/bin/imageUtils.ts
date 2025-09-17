@@ -37,27 +37,36 @@ export const compressImage = async (
   }
   
   
-  const maxSzMb = 0.4
-  const maxSzB = maxSzMb * 1024 * 1024
-  
-  if (/^image\/(png|jpe?g|webp)$/.test(imgFile.type) && imgFile.size <= maxSzB) {
-    return imgFile
-  }
-  
-  
-  const convertToWebpOptions: Options = {
+  const customImageConvertOptions: Options = {
     maxIteration: 20,
     initialQuality: 0.95,
-    maxSizeMB: 0.4, // 0.4 MB
+    maxSizeMB: 0.1,
+    maxWidthOrHeight: 800,
+    fileType: 'image/webp',
+  }
+  const convertToWebpOptions = {
+    maxIteration: 20,
+    initialQuality: 0.95,
+    maxSizeMB: 0.4,
     maxWidthOrHeight: 2400, // 2400x1080
-    // maxSizeMB: 0.1,
-    // maxWidthOrHeight: 800,
     useWebWorker: true,
     fileType: 'image/webp',
     ...(isSafari || isMobileSafari) && { fileType: 'image/jpeg' },
     ...ctrl?.signal && { signal: ctrl?.signal },
     onProgress: p => progress.set(p),
+    
+    ...customImageConvertOptions,
+  } satisfies Options
+  
+  
+  if (
+    /^image\/(png|jpe?g|webp)$/.test(imgFile.type) &&
+    imgFile.size <= convertToWebpOptions.maxSizeMB * 1024 * 1024
+  ) {
+    return imgFile
   }
+  
+  
   imgFile = await imageCompression(imgFile, convertToWebpOptions)
   
   

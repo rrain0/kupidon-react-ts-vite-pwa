@@ -4,8 +4,8 @@ import styled from '@emotion/styled'
 import {
   defaultCarouselMergeProgress,
   getLoopedCarouselProps,
-} from '@utils/animated/carousel/props/defaultCarouselProps.ts'
-import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
+} from '@utils/move/animated/carousel/props/defaultCarouselProps.ts'
+import { createTrackPropsGetter } from '@utils/move/animated/carousel/createTrackPropsGetter.ts'
 import { arrOfIndices, arrOfZeros } from '@utils/base/array/arrayUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { useInterval2 } from '@utils/react/useInterval2.ts'
@@ -22,7 +22,7 @@ import ImgSpark from 'src/components/elems/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/components/elems/ImgSpark/ImgSparkS6.ts'
 import SelectMeter from 'src/components/elems/select-item/SelectMeter/SelectMeter.tsx'
 import { SelectMeterS6 } from 'src/components/elems/select-item/SelectMeter/SelectMeterS6.ts'
-import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
+import { useCarousel } from '@utils/move/animated/carousel/useCarousel.ts'
 import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
 import absTlwh = EmotionCommon.absTlwh

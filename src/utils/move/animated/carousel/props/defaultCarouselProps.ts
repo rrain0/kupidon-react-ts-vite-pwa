@@ -1,8 +1,8 @@
 import { rf3, rf5, mod } from 'src/utils/base/math/mathUtils.ts'
-import { ReactU } from 'src/utils/react/ReactU.ts'
 import { Sign } from 'src/utils/base/typeUtils.ts'
-import { GetCarouselProps, getIndexesProps, MergeProgressCallback } from './carouselPropsCommon.ts'
-import noRepeatLog = ReactU.noRepeatLog
+import {
+  GetCarouselProps, getIndexesProps, MergeProgressCallback
+} from 'src/utils/move/animated/carousel/props/carouselPropsCommon.ts'
 
 
 

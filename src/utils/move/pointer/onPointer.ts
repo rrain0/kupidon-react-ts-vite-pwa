@@ -1,4 +1,4 @@
-import { Velocity } from 'src/utils/gestures/pointer/Veloctiy.ts'
+import { Velocity } from 'src/utils/move/pointer/Veloctiy.ts'
 
 
 export type OnPointerEvent = {

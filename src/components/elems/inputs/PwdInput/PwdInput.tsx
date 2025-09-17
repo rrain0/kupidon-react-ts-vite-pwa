@@ -1,4 +1,4 @@
-import { PointerU } from '@utils/gestures/pointer/PointerU.ts'
+import { evPreventDefault } from '@utils/move/pointer/pointerUtils.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/components/elems/buttons/IconButton/IconButtonS6.ts'
 import EyeCrossedOutIc from 'src/components/elems/icons/SvgIcons/pack/ui/EyeCrossedOutIc.tsx'
@@ -10,7 +10,6 @@ import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import flexC = EmotionCommon.flexC
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
-import evPreventDefault = PointerU.evPreventDefault
 
 
 

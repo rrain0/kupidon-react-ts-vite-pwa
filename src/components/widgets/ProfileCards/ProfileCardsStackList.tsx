@@ -1,10 +1,10 @@
 import AnimatedState from '@animated/elems/AnimatedState.tsx'
-import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
+import { createTrackPropsGetter } from '@utils/move/animated/carousel/createTrackPropsGetter.ts'
 import {
   fixedForwardCarouselMergeProgress,
   getFixedForwardLoopedCarouselProps,
-} from '@utils/animated/carousel/props/fixedCarouselProps.ts'
-import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
+} from '@utils/move/animated/carousel/props/fixedCarouselProps.ts'
+import { useCarousel } from '@utils/move/animated/carousel/useCarousel.ts'
 import { arrOfIndices } from '@utils/base/array/arrayUtils.ts'
 import { rf3 } from '@utils/base/math/mathUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
