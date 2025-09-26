@@ -7,18 +7,18 @@ import React, {
   useMemo, useRef,
   useState,
 } from 'react'
-import { lastI } from '@utils/base/array/arrayUtils.ts'
+import { lastI } from '@utils/base/arrayUtils.ts'
 import { ViewProps } from 'src/utils/view/ViewProps.ts'
 import { rangeClamp, rangeHas } from '@utils/base/math/rangeUtils.ts'
 import { useNoSelect } from '@utils/move/pointer/useNoSelect.ts'
 import { CssValue, parseCssStringValue } from '@utils/css/cssParserUtils.ts'
-import { Pu } from '@utils/base/typeUtils.ts'
-import { Setter } from '@utils/base/typeUtils.ts'
-import { isnonemptyval } from '@utils/base/typeUtils.ts'
-import { Cb } from '@utils/base/typeUtils.ts'
-import { isemptyval } from '@utils/base/typeUtils.ts'
-import { Defined } from '@utils/base/typeUtils.ts'
-import { isdef } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { Setter } from '@utils/base/tsUtils.ts'
+import { isnotnullundef } from '@utils/base/tsUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
+import { isnullundef } from '@utils/base/tsUtils.ts'
+import { Defined } from '@utils/base/tsUtils.ts'
+import { isdef } from '@utils/base/tsUtils.ts'
 
 
 
@@ -238,7 +238,7 @@ export const useBottomSheet = (
   ) => {
     const duration = function() {
       //console.log('lastSpeed',lastSpeed)
-      if (isemptyval(lastSpeed)) return animationDuration
+      if (isnullundef(lastSpeed)) return animationDuration
       const startH = sheetSpring.height.get()
       sheetSpring.height.set(startH)
       const pathPercent = pathProgressPercent(startH, endH)
@@ -272,7 +272,7 @@ export const useBottomSheet = (
   const reactOnState = () => {
     if (!isReady) return
     
-    const canOpen = isnonemptyval(realDefaultOpenIdx)
+    const canOpen = isnotnullundef(realDefaultOpenIdx)
     const canClose = newCloseable
     
     const currState = prevState
@@ -361,7 +361,7 @@ export const useBottomSheet = (
       return dragStartRef.current.lastSpeed
     }()
     const toFreeHeight = function() {
-      if (isemptyval(toOpenSnap)) return false
+      if (isnullundef(toOpenSnap)) return false
       if (snapPoints[toOpenSnap] !== 'free') return false
       return rangeHas(
         sheetSpring.height.get(),

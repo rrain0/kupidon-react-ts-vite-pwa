@@ -1,4 +1,4 @@
-import { arrOfIndices } from '@utils/base/array/arrayUtils.ts'
+import { arrOfIndices } from '@utils/base/arrayUtils.ts'
 import React, { useMemo, useRef, useState } from 'react'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import Gap from '@libs/short-propsed/components/Gap.tsx'
@@ -20,7 +20,7 @@ import BottomSheet from 'src/components/widgets/BottomSheet/BottomSheet.tsx'
 import OverflowWrapper from 'src/components/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/components/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import rowWrap = EmotionCommon.rowWrap
-import { ifNotNonNegInt, Setter } from '@utils/base/typeUtils.ts'
+import { ifNotNonNegInt, Setter } from '@utils/base/tsUtils.ts'
 
 
 

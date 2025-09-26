@@ -1,6 +1,6 @@
 import { Env } from 'src/configs/Env.ts'
 import { useLiveUsersStatus } from '@utils/app/useLiveUsersStatus.ts'
-import { arrOfIndices } from '@utils/base/array/arrayUtils.ts'
+import { arrOfIndices } from '@utils/base/arrayUtils.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { ChatItemA } from 'src/models/api/ChatItemA.ts'

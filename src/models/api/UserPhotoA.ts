@@ -1,4 +1,4 @@
-import { arrOfIndices } from '@utils/base/array/arrayUtils.ts'
+import { arrOfIndices } from '@utils/base/arrayUtils.ts'
 import {
   MediaInArrayDUC,
   newDefaultEmptyRemoteMediaInArray, newDefaultRemoteMediaInArray,

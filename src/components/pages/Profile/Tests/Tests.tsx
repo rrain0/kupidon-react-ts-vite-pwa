@@ -30,8 +30,8 @@ import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
-import { Cb1 } from '@utils/base/typeUtils.ts'
-import { Cb } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/tsUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 import row = EmotionCommon.row
 import Txt = EmotionCommon.Txt
 import pinkHeartWithExclamation from 'src/assets/im/ic/pink-heart-with-exclamation.svg'

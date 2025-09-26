@@ -20,15 +20,15 @@ import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import * as uuid from 'uuid'
-import { Cb } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 import CrossInCircleIc from 'src/components/elems/icons/SvgIcons/pack/ui/CrossInCircleIc.tsx'
 import col = EmotionCommon.col
 import row = EmotionCommon.row
-import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/tsUtils.ts'
 import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
-import { Cb1 } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/tsUtils.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 
 

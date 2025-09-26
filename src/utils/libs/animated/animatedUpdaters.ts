@@ -7,11 +7,11 @@ import {
   AnimatedElemAttrs,
   AnimatedElemStyle,
 } from '@libs/animated/AnimatedProps.ts'
-import { isnumber } from 'src/utils/base/typeUtils.ts'
-import { Cb1 } from 'src/utils/base/typeUtils.ts'
-import { Pu } from 'src/utils/base/typeUtils.ts'
-import { RecordPu } from 'src/utils/base/typeUtils.ts'
-import { Setter } from 'src/utils/base/typeUtils.ts'
+import { isnumber } from 'src/utils/base/tsUtils.ts'
+import { Cb1 } from 'src/utils/base/tsUtils.ts'
+import { Pu } from 'src/utils/base/tsUtils.ts'
+import { RecordPu } from 'src/utils/base/tsUtils.ts'
+import { Setter } from 'src/utils/base/tsUtils.ts'
 
 
 

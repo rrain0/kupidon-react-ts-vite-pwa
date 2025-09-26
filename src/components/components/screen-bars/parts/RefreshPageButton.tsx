@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { useBool } from '@utils/state/react/base/useBool.ts'
+import { useBool } from '@utils/state/react/useBool.ts'
 import React, { useEffect } from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'

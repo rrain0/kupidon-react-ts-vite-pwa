@@ -19,8 +19,8 @@ import resetButton = EmotionCommon.resetButton
 import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
-import { Cb } from '@utils/base/typeUtils.ts'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

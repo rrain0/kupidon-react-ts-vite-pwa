@@ -4,7 +4,7 @@ import {
 } from 'src/utils/move/animated/carousel/props/carouselPropsCommon.ts'
 import { rf3, rf5 } from 'src/utils/base/math/mathUtils.ts'
 import { rangeClamp } from 'src/utils/base/math/rangeUtils.ts'
-import { Sign } from 'src/utils/base/typeUtils.ts'
+import { Sign } from 'src/utils/base/tsUtils.ts'
 
 
 

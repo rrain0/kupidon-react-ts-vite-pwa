@@ -1,4 +1,4 @@
-import { type Cb, type CbN, isemptyval, isnonemptyval } from 'src/utils/base/typeUtils.ts'
+import { type Cb, type CbN, isnullundef, isnotnullundef } from 'src/utils/base/tsUtils.ts'
 
 
 
@@ -47,12 +47,12 @@ export const withThrottle = <Args extends any[]>(
   
   const throttledCallback: (...args: Args) => void = (...args) => {
     const now = +new Date()
-    if (isemptyval(timerId) && (now - prev > interval)) {
+    if (isnullundef(timerId) && (now - prev > interval)) {
       prev = +new Date()
       callback(...args)
     }
     else {
-      if (isnonemptyval(timerId)) clearTimeout(timerId)
+      if (isnotnullundef(timerId)) clearTimeout(timerId)
       timerId = setTimeout(() => {
         timerId = null
         prev = +new Date()

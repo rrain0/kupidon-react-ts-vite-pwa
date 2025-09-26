@@ -1,5 +1,5 @@
 import { mod } from 'src/utils/base/math/mathUtils.ts'
-import { ifNaN } from 'src/utils/base/typeUtils.ts'
+import { ifNaN } from 'src/utils/base/tsUtils.ts'
 
 
 

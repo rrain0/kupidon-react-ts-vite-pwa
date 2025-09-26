@@ -13,10 +13,10 @@ import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
 import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
 import { useStateAndRef } from 'src/utils/state/react/base/useStateAndRef.ts'
 import { useEvent } from 'src/utils/react/useEvent.ts'
-import { Pu } from 'src/utils/base/typeUtils.ts'
+import { Pu } from 'src/utils/base/tsUtils.ts'
 import { rf3, mod } from 'src/utils/base/math/mathUtils.ts'
-import { Getter } from 'src/utils/base/typeUtils.ts'
-import { isdef } from 'src/utils/base/typeUtils.ts'
+import { Getter } from 'src/utils/base/tsUtils.ts'
+import { isdef } from 'src/utils/base/tsUtils.ts'
 
 
 

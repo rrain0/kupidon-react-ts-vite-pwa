@@ -10,8 +10,8 @@ import {
 } from '@libs/media/Media.ts'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
-import { arrMapOneToIf } from '@utils/base/array/arrayUtils.ts'
-import { arrMergeTo, diff2 } from '@utils/base/array/arrayDiffUtils.ts'
+import { arrMapOneToIf } from '@utils/base/arrayUtils.ts'
+import { arrMergeTo, diff2 } from '@utils/array/arrayDiffUtils.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { AuthZustand } from 'src/zustand/auth/authZustand.ts'
 import FormValues = ProfilePageValidation.FormValues
@@ -20,7 +20,7 @@ import UpdateUserErrorData = UserApi.UpdateUserErrorData
 import CurrentUserSuccessData = UserApi.CurrentUserSuccessData
 import ApiResponse = ApiResponseUtils.ApiResponse
 import photosComparator = ProfilePageValidation.photosComparator
-import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/tsUtils.ts'
 import UserToUpdate = UserApi.UserToUpdate
 import AddProfilePhoto = UserApi.profilePhotoToAdd
 
@@ -94,14 +94,14 @@ export const profileUpdateApiRequest = (
       updateForPhoto?: Partial<MediaInArrayDUC>,
     ) => {
       setFormValues(s => ({ ...s,
-        photos: arrMapOneToIf({
-          arr: s.photos,
-          filter: elem => elem.upload?.id === updateForUpload.id,
-          mapper: elem => ({
+        photos: arrMapOneToIf(
+          s.photos,
+          elem => elem.upload?.id === updateForUpload.id,
+          elem => ({
             ...elem, ...updateForPhoto,
             upload: { ...elem.upload, ...updateForUpload },
           }),
-        }),
+        ),
       }))
     }
     const delayShowUploadTimerId = setTimeout(() => {
@@ -170,11 +170,11 @@ export const profileUpdateApiRequest = (
       } satisfies Partial<MediaInArrayDUC>
       
       setFormValues(form => ({ ...form,
-        photos: arrMapOneToIf({
-          arr: form.photos,
-          filter: photo => photo.upload?.id === uploadStart.upload.id,
-          mapper: photo => ({ ...photo, ...uploadStart }),
-        }),
+        photos: arrMapOneToIf(
+          form.photos,
+          photo => photo.upload?.id === uploadStart.upload.id,
+          photo => ({ ...photo, ...uploadStart }),
+        ),
       }))
       
       
@@ -184,16 +184,16 @@ export const profileUpdateApiRequest = (
       ) => {
         const upload = getUpload()
         if (upload) setFormValues(form => ({ ...form,
-          photos: arrMapOneToIf({
-            arr: form.photos,
-            filter: photo => photo.upload?.id === upload.id,
-            mapper: photo => ({ ...photo,
+          photos: arrMapOneToIf(
+            form.photos,
+            photo => photo.upload?.id === upload.id,
+            photo => ({ ...photo,
               ...photoUpdate,
               ...uploadUpdate && photo.upload && {
                 upload: { ...photo.upload, ...uploadUpdate },
               },
             }),
-          }),
+          ),
         }))
       }
       const updatePhotoThrottled = withThrottle(

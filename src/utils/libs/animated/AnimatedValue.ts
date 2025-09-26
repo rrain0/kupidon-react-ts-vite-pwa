@@ -5,12 +5,12 @@ import {
 } from '@libs/animated/AnimationConfig.ts'
 import { addAnimation, removeAnimation } from '@libs/animated/runAnimations.ts'
 import { getTime } from '@libs/animated/util.ts'
-import { Mapper } from 'src/utils/base/typeUtils.ts'
-import { Cb } from 'src/utils/base/typeUtils.ts'
-import { noop } from 'src/utils/base/typeUtils.ts'
-import { Cb1 } from 'src/utils/base/typeUtils.ts'
+import { Mapper } from 'src/utils/base/tsUtils.ts'
+import { Cb } from 'src/utils/base/tsUtils.ts'
+import { noop } from 'src/utils/base/tsUtils.ts'
+import { Cb1 } from 'src/utils/base/tsUtils.ts'
 import { withThrottle } from 'src/utils/base/asyncUtils.ts'
-import { Pu } from 'src/utils/base/typeUtils.ts'
+import { Pu } from 'src/utils/base/tsUtils.ts'
 
 
 

@@ -7,8 +7,8 @@ import Flex from '@libs/short-propsed/components/Flex.tsx'
 import MountController, { MountControllerRenderProps } from 'src/components/components/animations/MountController.tsx'
 import AcceptButton from 'src/components/components/screen-bars/parts/AcceptButton.tsx'
 import CancelButton from 'src/components/components/screen-bars/parts/CancelButton.tsx'
-import { Cb } from '@utils/base/typeUtils.ts'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 import StyleProp = ReactU.StyleProp
 
 

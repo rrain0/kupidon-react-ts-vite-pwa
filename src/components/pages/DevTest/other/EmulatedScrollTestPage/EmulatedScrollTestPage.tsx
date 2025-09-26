@@ -8,7 +8,7 @@ import { getViewProps } from '@utils/view/ViewProps.ts'
 import React from 'react'
 import { useEmulatedScroll }
   from 'src/components/pages/DevTest/other/EmulatedScrollTestPage/useEmulatedScroll.ts'
-import { arrOfNumbers } from '@utils/base/array/arrayUtils.ts'
+import { arrOfNumbers } from '@utils/base/arrayUtils.ts'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
 import { NumRange } from '@utils/base/math/rangeUtils.ts'

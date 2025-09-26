@@ -27,8 +27,8 @@ import CrossBoldIc from 'src/components/elems/icons/SvgIcons/pack/ui/CrossBoldIc
 import InfoCircleOutlinedIc from 'src/components/elems/icons/SvgIcons/pack/ui/InfoCircleOutlinedIc.tsx'
 import CheckmarkIc from 'src/components/elems/icons/SvgIcons/pack/ui/CheckmarkIc.tsx'
 import CheckmarkDoubleIc from 'src/components/elems/icons/SvgIcons/pack/ui/CheckmarkDoubleIc.tsx'
-import { Pu } from '@utils/base/typeUtils.ts'
-import { isdef } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { isdef } from '@utils/base/tsUtils.ts'
 
 
 

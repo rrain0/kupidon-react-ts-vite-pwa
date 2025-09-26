@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { useBool } from '@utils/state/react/base/useBool.ts'
-import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
-import { Pu } from '@utils/base/typeUtils.ts'
-import { ValueOrProducer } from '@utils/base/typeUtils.ts'
-import { Cb } from '@utils/base/typeUtils.ts'
+import { useBool } from '@utils/state/react/useBool.ts'
+import { SetterOrUpdater } from '@utils/base/tsUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { ValueOrProducer } from '@utils/base/tsUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 
 
 

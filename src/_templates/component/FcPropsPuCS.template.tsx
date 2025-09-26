@@ -2,7 +2,7 @@ import React from 'react'
 import { ReactU } from '@utils/react/ReactU.ts'
 
 import Children = ReactU.Children
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 
 

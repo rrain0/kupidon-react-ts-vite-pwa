@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from 'react'
 
 import commonCss from 'src/styles/common/common.module.scss'
-import { Pu } from 'src/utils/base/typeUtils.ts'
+import { Pu } from 'src/utils/base/tsUtils.ts'
 
 
 

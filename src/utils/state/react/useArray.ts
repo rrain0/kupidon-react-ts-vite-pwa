@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react'
 import {
   ArrFilter, arrFilterToIf, arrHas, arrAddUniqToIf, arrToggleTo, arrRemoveToIf
-} from 'src/utils/base/array/arrayUtils.ts'
+} from 'src/utils/base/arrayUtils.ts'
 import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
 import { useAsRefGet } from 'src/utils/state/react/base/useAsRefGet.ts'
-import { ValueOrProducer } from 'src/utils/base/typeUtils.ts'
+import { ValueOrProducer } from 'src/utils/base/tsUtils.ts'
 
 
 

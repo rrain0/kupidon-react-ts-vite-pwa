@@ -5,9 +5,9 @@ import { ReactU } from '@utils/react/ReactU.ts'
 import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import React, { useEffect, useState } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
-import { Cb } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 import StyleProp = ReactU.StyleProp
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

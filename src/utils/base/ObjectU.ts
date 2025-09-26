@@ -1,10 +1,12 @@
 import { capitalize } from 'src/utils/base/stringUtils.ts'
+import {
+  isnull,
+  isobject,
+  isRecord,
+  isundef,
+  type WriteablePartial,
+} from 'src/utils/base/tsUtils.ts'
 import { Pair } from 'src/utils/js/Pair.ts'
-import { WriteablePartial } from 'src/utils/base/typeUtils.ts'
-import { isobject } from 'src/utils/base/typeUtils.ts'
-import { isundef } from 'src/utils/base/typeUtils.ts'
-import { isnull } from 'src/utils/base/typeUtils.ts'
-import { isRecord } from 'src/utils/base/typeUtils.ts'
 
 
 
@@ -71,12 +73,7 @@ export function objectMap<
   object: O1,
   mapper: (entry: ObjectEntriesOfStringKeys<O1>, object: O1) => ObjectEntriesOfStringKeys<O2>
 ): O2 {
-  const object2 = { } as O2
-  objectEntries(object).forEach(entry => {
-    const [k2, v2] = mapper(entry, object)
-    object2[k2] = v2
-  })
-  return object2
+  return Object.fromEntries(Object.entries(object).map(entry => mapper(entry as any, object))) as O2
 }
 
 

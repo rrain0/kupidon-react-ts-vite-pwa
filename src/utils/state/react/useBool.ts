@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import type { ValueOrProducer } from 'src/utils/base/typeUtils.ts'
+import type { ValueOrProducer } from 'src/utils/base/tsUtils.ts'
 
 
 

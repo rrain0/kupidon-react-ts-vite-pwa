@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { NonEmptyArr } from 'src/utils/base/array/arrayMoreUtils.ts'
+import { NonEmptyArr } from 'src/utils/array/arrayMoreUtils.ts'
 
 
 

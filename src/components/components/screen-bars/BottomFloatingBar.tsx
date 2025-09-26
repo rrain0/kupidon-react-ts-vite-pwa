@@ -9,10 +9,10 @@ import AcceptAndCancelButtons
 import QuickSettingsButton
   from 'src/components/components/screen-bars/parts/QuickSettingsButton.tsx'
 import RefreshButton from 'src/components/components/screen-bars/parts/RefreshButton.tsx'
-import { Pu } from '@utils/base/typeUtils.ts'
-import { isdef } from '@utils/base/typeUtils.ts'
-import { isundef } from '@utils/base/typeUtils.ts'
-import { Cb } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { isdef } from '@utils/base/tsUtils.ts'
+import { isundef } from '@utils/base/tsUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 import modalFloor100 = StyleVals.modalFloor100
 
 

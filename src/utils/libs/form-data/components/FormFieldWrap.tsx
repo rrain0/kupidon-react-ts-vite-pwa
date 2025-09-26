@@ -15,11 +15,11 @@ import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateErrors
 import awaitDelay = ValidationActions.awaitDelay
 import Values = ValidationCore.Values
-import { SetterOrUpdater } from 'src/utils/base/typeUtils.ts'
-import { ValueOrMapper } from 'src/utils/base/typeUtils.ts'
-import { Cb } from 'src/utils/base/typeUtils.ts'
-import { Cb1 } from 'src/utils/base/typeUtils.ts'
-import { Mapper } from 'src/utils/base/typeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/tsUtils.ts'
+import { ValueOrMapper } from 'src/utils/base/tsUtils.ts'
+import { Cb } from 'src/utils/base/tsUtils.ts'
+import { Cb1 } from 'src/utils/base/tsUtils.ts'
+import { Mapper } from 'src/utils/base/tsUtils.ts'
 
 
 

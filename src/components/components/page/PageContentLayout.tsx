@@ -8,7 +8,7 @@ import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import { ReactU } from 'src/utils/react/ReactU'
 import Children = ReactU.Children
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 import gridC = EmotionCommon.gridC
 import noPointer = EmotionCommon.noPointer

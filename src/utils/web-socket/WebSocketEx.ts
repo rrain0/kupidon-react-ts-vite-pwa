@@ -1,6 +1,6 @@
 import { delay, newPromise } from 'src/utils/base/asyncUtils.ts'
 import { asMsgToClient, WsMsg } from 'src/utils/web-socket/WsU.ts'
-import { isstring } from 'src/utils/base/typeUtils.ts'
+import { isstring } from 'src/utils/base/tsUtils.ts'
 
 
 

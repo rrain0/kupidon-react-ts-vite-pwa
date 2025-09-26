@@ -11,7 +11,7 @@ import CssPseudo = WidgetStyle0.CssPseudo
 import CssWidget = WidgetStyle0.CssWidget
 import CssAttr = WidgetStyle0.CssAttr
 import bgInBorder = EmotionCommon.bgInBorder
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 import CssProp = WidgetStyle0.CssProp

@@ -7,8 +7,8 @@ import {
 } from 'date-fns'
 import { useEffect, useState } from 'react'
 import { maxTimeout } from 'src/utils/base/jsUtils.ts'
-import { Pu } from 'src/utils/base/typeUtils.ts'
-import { isdef } from 'src/utils/base/typeUtils.ts'
+import { Pu } from 'src/utils/base/tsUtils.ts'
+import { isdef } from 'src/utils/base/tsUtils.ts'
 
 
 

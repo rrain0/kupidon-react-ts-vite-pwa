@@ -3,7 +3,7 @@ import { useWasGesture } from '@utils/app/gestures/useWasGesture.ts'
 import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { RippleAction, RippleProps } from 'src/components/elems/Ripple/Ripple.tsx'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { CssColor } from '@utils/css/cssUtils.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 import createCssCustomPropsMapper = ReactU.createCssCustomPropsMapper
 
 

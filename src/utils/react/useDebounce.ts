@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
-
 import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
 import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
-import { Cb } from 'src/utils/base/typeUtils.ts'
+import type { Cb } from 'src/utils/base/tsUtils.ts'
 
 
 

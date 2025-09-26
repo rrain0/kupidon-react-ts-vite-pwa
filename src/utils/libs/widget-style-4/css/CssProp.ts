@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 
-import { isdef } from 'src/utils/base/typeUtils.ts'
+import { isdef } from 'src/utils/base/tsUtils.ts'
 
 
 

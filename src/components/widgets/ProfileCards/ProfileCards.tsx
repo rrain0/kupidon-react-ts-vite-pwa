@@ -9,7 +9,7 @@ import {
 import { createTrackPropsGetter } from '@utils/move/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@utils/move/animated/carousel/useCarousel.ts'
 import { cssjsClampRatio } from '@utils/css/cssUtils.ts'
-import { useBool } from '@utils/state/react/base/useBool.ts'
+import { useBool } from '@utils/state/react/useBool.ts'
 import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
@@ -33,7 +33,7 @@ import ProfileCardsFullInfo from 'src/components/widgets/ProfileCards/ProfileCar
 import ProfileCardsInfoOverlay
   from 'src/components/widgets/ProfileCards/ProfileCardsInfoOverlay.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { arrOfIndices, arrRandom } from '@utils/base/array/arrayUtils.ts'
+import { arrOfIndices, arrRandom } from '@utils/base/arrayUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import Txt = EmotionCommon.Txt
 import flexC = EmotionCommon.flexC
@@ -46,7 +46,7 @@ import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import full = EmotionCommon.full
-import { Cb } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 
 
 

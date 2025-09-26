@@ -1,4 +1,4 @@
-import { NonEmptyArr } from '@utils/base/array/arrayMoreUtils.ts'
+import { NonEmptyArr } from '@utils/array/arrayMoreUtils.ts'
 import { Lang } from '@utils/app/lang/Lang.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { DefaultTheme } from 'src/styles/themes/ThemesCollection.ts'

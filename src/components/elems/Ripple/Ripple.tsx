@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { ArrFirstOptional } from '@utils/base/array/arrayMoreUtils.ts'
+import { ArrFirstOptional } from '@utils/array/arrayMoreUtils.ts'
 import { objectKeys } from '@utils/base/ObjectU.ts'
 import type { WH, XY } from '@utils/css/cssUtils.ts'
 import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
@@ -12,7 +12,7 @@ import { ReactU } from '@utils/react/ReactU.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import ClassStyle = ReactU.ClassStyle
 import RippleMode = RippleS6.RippleMode
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

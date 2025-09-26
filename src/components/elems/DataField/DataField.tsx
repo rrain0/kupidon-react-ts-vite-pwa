@@ -6,8 +6,8 @@ import clsx from 'clsx'
 
 import row = EmotionCommon.row
 import absTlwh = EmotionCommon.absTlwh
-import { Pu } from '@utils/base/typeUtils.ts'
-import { toEmptyAttr } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { toEmptyAttr } from '@utils/base/tsUtils.ts'
 
 
 

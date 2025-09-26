@@ -1,5 +1,5 @@
 import React from 'react'
-import type { Cb1, Getter, Setter } from 'src/utils/base/typeUtils.ts'
+import type { Cb1, Getter, Setter } from 'src/utils/base/tsUtils.ts'
 import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
 
 

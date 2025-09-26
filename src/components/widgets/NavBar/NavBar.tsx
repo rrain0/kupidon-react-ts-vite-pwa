@@ -24,8 +24,8 @@ import QuickSettings, {
   QuickSettingsOverlayName,
 } from 'src/components/widgets/QuickSettings/QuickSettings.tsx'
 import modalFloor500 = StyleVals.modalFloor500
-import { Pu } from '@utils/base/typeUtils.ts'
-import { toEmptyAttr } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { toEmptyAttr } from '@utils/base/tsUtils.ts'
 
 
 

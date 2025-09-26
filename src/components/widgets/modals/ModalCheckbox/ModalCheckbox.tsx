@@ -11,9 +11,9 @@ import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomShee
 import CheckboxInputGroup from 'src/components/elems/inputs/CheckboxInputGroup/CheckboxInputGroup.tsx'
 import { Option } from 'src/models/ui/Option.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { Cb } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 import col = EmotionCommon.col
-import { Cb1 } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/tsUtils.ts'
 import row = EmotionCommon.row
 
 

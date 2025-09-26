@@ -3,7 +3,7 @@ import heic2any from 'heic2any'
 import { isSafari, isMobileSafari } from 'react-device-detect'
 import { trimExt } from 'src/utils/bin/fileUtils.ts'
 import { StagedProgress } from 'src/utils/ui/StagedProgress.ts'
-import { Cb1 } from 'src/utils/base/typeUtils.ts'
+import { Cb1 } from 'src/utils/base/tsUtils.ts'
 
 
 

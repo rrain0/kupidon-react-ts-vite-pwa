@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Cb } from 'src/utils/base/typeUtils.ts'
+import { Cb } from 'src/utils/base/tsUtils.ts'
 
 
 

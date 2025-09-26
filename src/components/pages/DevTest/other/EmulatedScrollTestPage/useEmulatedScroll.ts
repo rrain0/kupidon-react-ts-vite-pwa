@@ -5,7 +5,7 @@ import React from 'react'
 import { rangeClamp, rangeMap, rangeMapClamp } from '@utils/base/math/rangeUtils.ts'
 import { useRefAsGetSet } from '@utils/state/react/base/useRefAsGetSet.ts'
 import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
-import { Getter } from '@utils/base/typeUtils.ts'
+import { Getter } from '@utils/base/tsUtils.ts'
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
 
 

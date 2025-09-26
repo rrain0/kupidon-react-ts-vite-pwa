@@ -21,7 +21,7 @@ import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import TopActionBar from 'src/components/components/screen-bars/TopActionBar.tsx'
 import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
 import Txt = EmotionCommon.Txt
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

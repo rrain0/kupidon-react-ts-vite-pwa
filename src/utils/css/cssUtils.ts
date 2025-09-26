@@ -1,5 +1,5 @@
-import { falsy } from 'src/utils/base/typeUtils.ts'
-import { isnumber } from 'src/utils/base/typeUtils.ts'
+import { falsy } from 'src/utils/base/tsUtils.ts'
+import { isnumber } from 'src/utils/base/tsUtils.ts'
 
 
 

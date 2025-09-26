@@ -1,6 +1,6 @@
 import { getDataUrlProps } from 'src/utils/bin/dataUrl.ts'
-import { noop } from 'src/utils/base/typeUtils.ts'
-import { Pu } from 'src/utils/base/typeUtils.ts'
+import { noop } from 'src/utils/base/tsUtils.ts'
+import { Pu } from 'src/utils/base/tsUtils.ts'
 import { pathToExt, pathToFilename } from 'src/utils/bin/fileUtils.ts'
 
 

@@ -4,7 +4,7 @@ import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import React, { useImperativeHandle, useLayoutEffect } from 'react'
 
 import Flex from '@libs/short-propsed/components/Flex.tsx'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 import ClassNameProp = ReactU.ClassNameProp
 import StyleProp = ReactU.StyleProp
 

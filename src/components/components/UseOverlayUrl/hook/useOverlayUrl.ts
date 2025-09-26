@@ -1,10 +1,10 @@
 
-import { useBool } from '@utils/state/react/base/useBool.ts'
+import { useBool } from '@utils/state/react/useBool.ts'
 import { useSearchParamValue } from '@utils/url/useSearchParamValue.ts'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
-import { Cb } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 
 
 

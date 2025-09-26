@@ -50,6 +50,9 @@ export type PartialDefaults<O extends object = object, Defaults extends Partial<
   & { [DProp in keyof Defaults & keyof O]?: O[DProp] }
 
 
+export type RecordPartial<K extends keyof any, T> = {
+  [P in K]+?: T
+}
 export type RecordRo<K extends keyof any, T> = {
   +readonly [P in K]: T
 }
@@ -65,14 +68,6 @@ export type RecordPuro<K extends keyof any, T> = {
 export type ObjectUnionFix<O1 extends object, O2 extends object> =
   | O1 & { [OptKeys in keyof Omit<O2, keyof O1>]: undefined }
   | O2 & { [OptKeys in keyof Omit<O1, keyof O2>]: undefined }
-
-// TODO костыль - ts костыль для компиляции exhaustive ifs & function return
-export function assertNever(value: never): never {
-  throw new Error(`Value must be never, but it is: ${value}`)
-}
-export function throwNever(): never {
-  throw new Error(`This code must not be reached`)
-}
 
 
 
@@ -92,13 +87,13 @@ export function isnull<T>(value: T | null): value is null {
   return value === null
 }
 // Value is not null
-export function isnonnull<T>(value: T | null): value is T {
+export function isnotnull<T>(value: T | null): value is T {
   return value !== null
 }
-export function isnonemptyval<E extends {}, T>(value: T | E): value is E {
+export function isnotnullundef<E extends {}, T>(value: T | E): value is E {
   return value !== null && value !== undefined
 }
-export function isemptyval<NE extends emptyval, T>(value: T | NE): value is NE {
+export function isnullundef<NE extends emptyval, T>(value: T | NE): value is NE {
   return value === null || value === undefined
 }
 export function isbool<S extends boolean, T>(value: T | S): value is S {
@@ -121,6 +116,11 @@ export function isobject<T>(value: T): value is Isobject<T> {
 export function isfunction<F extends Function, T>(value: T | F): value is F {
   return typeof value === 'function'
 }
+export function assertNever(value: never): never {
+  throw new Error(
+    `This code must not be reached because value must be never, but it is: ${value}`
+  )
+}
 
 
 
@@ -128,7 +128,7 @@ export function isfunction<F extends Function, T>(value: T | F): value is F {
 export function isObject<O extends object, T>(value: T | O): value is O {
   return value instanceof Object
 }
-export function isArray<A extends readonly any[], T>(value: T | A): value is A {
+export function isArray<A extends any[], T>(value: T | A): value is A {
   return value instanceof Array
 }
 export function isFunction<F extends Function, T>(value: T | F): value is F {

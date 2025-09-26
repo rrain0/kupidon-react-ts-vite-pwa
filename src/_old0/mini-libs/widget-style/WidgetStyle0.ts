@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
 import { objectMap } from '@utils/base/ObjectU.ts'
-import { Pu } from '@utils/base/typeUtils.ts'
-import { isObject } from '@utils/base/typeUtils.ts'
-import { isstring } from '@utils/base/typeUtils.ts'
-import { RecordRo } from '@utils/base/typeUtils.ts'
-import { isdef } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { isObject } from '@utils/base/tsUtils.ts'
+import { isstring } from '@utils/base/tsUtils.ts'
+import { RecordRo } from '@utils/base/tsUtils.ts'
+import { isdef } from '@utils/base/tsUtils.ts'
 
 
 

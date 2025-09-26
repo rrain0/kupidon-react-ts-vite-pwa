@@ -5,7 +5,7 @@ import {
   type SetterOrUpdater,
   type Updater,
   type ValueOrProducer,
-} from 'src/utils/base/typeUtils.ts'
+} from 'src/utils/base/tsUtils.ts'
 import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
 
 

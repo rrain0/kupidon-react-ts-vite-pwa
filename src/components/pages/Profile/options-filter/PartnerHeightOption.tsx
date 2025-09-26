@@ -1,9 +1,9 @@
 import { css } from '@emotion/react'
-import { mergeMappedIf } from '@utils/base/array/arrayDiffUtils.ts'
+import { mergeMappedIf } from '@utils/array/arrayDiffUtils.ts'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import RulerVerticalGradIc
   from 'src/components/elems/icons/GradSvgIcons/pack/special/RulerVerticalGradIc.tsx'
-import { arrEq } from '@utils/base/array/arrayUtils.ts'
+import { arrEq } from '@utils/base/arrayUtils.ts'
 import { useStateMapperSync } from '@utils/state/react/useStateMapperSync.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import React, { useState } from 'react'

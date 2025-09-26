@@ -11,10 +11,10 @@ import RadioInputGroup from 'src/components/elems/inputs/RadioInputGroup/RadioIn
 import { RadioInputStyle } from 'src/components/elems/inputs/RadioInput/RadioInputStyle.ts'
 import { Option } from 'src/models/ui/Option.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { Cb } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 import col = EmotionCommon.col
-import { Cb1 } from '@utils/base/typeUtils.ts'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/tsUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

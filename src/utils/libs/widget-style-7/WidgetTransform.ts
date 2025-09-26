@@ -4,17 +4,17 @@ import {
   WidgetElemPropReplacer, WidgetState,
   WidgetStyleReplacer,
 } from '@libs/widget-style-7/WidgetConfig.ts'
-import { isfunction } from 'src/utils/base/typeUtils.ts'
-import { isArray } from 'src/utils/base/typeUtils.ts'
-import { isobject } from 'src/utils/base/typeUtils.ts'
-import { isundef } from 'src/utils/base/typeUtils.ts'
-import { isnull } from 'src/utils/base/typeUtils.ts'
-import { isbool } from 'src/utils/base/typeUtils.ts'
-import { isnumstr } from 'src/utils/base/typeUtils.ts'
+import { isfunction } from 'src/utils/base/tsUtils.ts'
+import { isArray } from 'src/utils/base/tsUtils.ts'
+import { isobject } from 'src/utils/base/tsUtils.ts'
+import { isundef } from 'src/utils/base/tsUtils.ts'
+import { isnull } from 'src/utils/base/tsUtils.ts'
+import { isbool } from 'src/utils/base/tsUtils.ts'
+import { isnumstr } from 'src/utils/base/tsUtils.ts'
 import { BuiltWidget, WidgetElem } from './WidgetBuildedConfig.ts'
-import { Pu } from 'src/utils/base/typeUtils.ts'
-import { isRecord } from 'src/utils/base/typeUtils.ts'
-import { isstring } from 'src/utils/base/typeUtils.ts'
+import { Pu } from 'src/utils/base/tsUtils.ts'
+import { isRecord } from 'src/utils/base/tsUtils.ts'
+import { isstring } from 'src/utils/base/tsUtils.ts'
 
 
 

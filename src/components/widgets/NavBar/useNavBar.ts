@@ -1,9 +1,9 @@
-import { arrRemove } from '@utils/base/array/arrayUtils.ts'
+import { arrRemove } from '@utils/base/arrayUtils.ts'
 import { useEffect, useId, useMemo, useState, useTransition } from 'react'
 import { NavBarPlace } from 'src/components/widgets/NavBar/NavBar.tsx'
 import { navStack } from 'src/components/widgets/NavBar/navStack.ts'
 import { NavBarStore, useNavBarZustand } from 'src/zustand/app/navBarZustand.ts'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

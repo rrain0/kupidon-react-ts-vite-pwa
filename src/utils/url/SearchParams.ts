@@ -4,7 +4,7 @@ import {
   SearchParamsData, SearchParamValueData, setSearchParam,
   stringifySearchParams,
 } from 'src/utils/url/SearchParamsU.ts'
-import { isstring } from 'src/utils/base/typeUtils.ts'
+import { isstring } from 'src/utils/base/tsUtils.ts'
 
 
 export class SearchParams {

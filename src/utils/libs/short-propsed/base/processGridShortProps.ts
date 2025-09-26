@@ -1,6 +1,6 @@
-import type { Pu } from 'src/utils/base/typeUtils.ts'
-import { ifBool } from 'src/utils/base/typeUtils.ts'
-import { isdef } from 'src/utils/base/typeUtils.ts'
+import type { Pu } from 'src/utils/base/tsUtils.ts'
+import { ifBool } from 'src/utils/base/tsUtils.ts'
+import { isdef } from 'src/utils/base/tsUtils.ts'
 
 
 
@@ -9,6 +9,9 @@ export type GridShortProps = Pu<{
   rows: string
   cols: string
   areas: string
+  
+  autoRows: string
+  autoCols: string
   
   
   align: string | boolean // alignItems // true => 'center'
@@ -40,6 +43,7 @@ export const processGridShortProps = <P extends object>(
 ) => {
   const {
     areas, rows, cols,
+    autoRows, autoCols,
     align, justify, place,
     alignCt, justifyCt, placeCt,
     alignStart, alignEnd, alignStretch,
@@ -54,6 +58,9 @@ export const processGridShortProps = <P extends object>(
     ...isdef(areas) && { gridTemplateAreas: areas },
     ...isdef(rows) && { gridTemplateRows: rows },
     ...isdef(cols) && { gridTemplateColumns: cols },
+    
+    ...isdef(autoRows) && { gridAutoRows: autoRows },
+    ...isdef(autoCols) && { gridAutoColumns: autoCols },
     
     
     ...alignStart && { alignItems: 'start' },

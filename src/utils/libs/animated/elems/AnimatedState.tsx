@@ -8,7 +8,7 @@ import {
 import {
   useUpdateComponentStateUpdaters,
 } from '@libs/animated/animatedUpdaters.ts'
-import { Pu } from 'src/utils/base/typeUtils.ts'
+import { Pu } from 'src/utils/base/tsUtils.ts'
 
 
 

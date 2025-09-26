@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
-import { Cb } from 'src/utils/base/typeUtils.ts'
-import { isdef } from 'src/utils/base/typeUtils.ts'
+import { Cb } from 'src/utils/base/tsUtils.ts'
+import { isdef } from 'src/utils/base/tsUtils.ts'
 
 
 

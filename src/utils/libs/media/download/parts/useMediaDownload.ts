@@ -1,6 +1,7 @@
 import { withThrottle } from 'src/utils/base/asyncUtils.ts'
 import { random } from 'src/utils/base/math/randomUtils.ts'
-import { fetchToBlob, blobToDataUrl } from 'src/utils/bin/binDataUtils.ts'
+import { blobToDataUrl } from 'src/utils/bin/binDataUtils.ts'
+import { axiosToBlob } from '@utils/bin/binDataAxiosUtils.ts'
 import { StagedProgress } from 'src/utils/ui/StagedProgress.ts'
 import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
 import { useEffect } from 'react'
@@ -10,7 +11,7 @@ import {
   MediaOperation,
   newDefaultMediaOperation,
 } from '@libs/media/Media.ts'
-import { SetterOrUpdater } from 'src/utils/base/typeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/tsUtils.ts'
 
 
 
@@ -119,7 +120,7 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
             }
             
             //console.log('download started')
-            const blob = await fetchToBlob(m.remoteUrl, {
+            const blob = await axiosToBlob(m.remoteUrl, {
               onProgress, abortCtrl: fetchToBlobAbortCtrl,
             })
             abortCtrl.signal.throwIfAborted()

@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react'
-import type { Cb1 } from 'src/utils/base/typeUtils.ts'
+import type { Cb1 } from 'src/utils/base/tsUtils.ts'
 
 
 

@@ -2,6 +2,7 @@ import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elems/AnimatedState.tsx'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { axiosToBlob } from '@utils/bin/binDataAxiosUtils.ts'
 import {
   defaultCarouselMergeProgress,
   getClampedCarouselProps,
@@ -9,8 +10,8 @@ import {
 } from '@utils/move/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@utils/move/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@utils/move/animated/carousel/useCarousel.ts'
-import { arrOfIndices, arrMapOneToIf } from '@utils/base/array/arrayUtils.ts'
-import { diff2, arrMergeTo } from '@utils/base/array/arrayDiffUtils.ts'
+import { arrOfIndices, arrMapOneToIf } from '@utils/base/arrayUtils.ts'
+import { diff2, arrMergeTo } from '@utils/array/arrayDiffUtils.ts'
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import { random } from '@utils/base/math/randomUtils.ts'
 import { useCssWhRef } from '@utils/view/useCssWhRef.ts'
@@ -41,7 +42,7 @@ import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { objectKeys } from '@utils/base/ObjectU.ts'
-import { blobToDataUrl, fetchToBlob } from '@utils/bin/binDataUtils.ts'
+import { blobToDataUrl } from '@utils/bin/binDataUtils.ts'
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from '@libs/form-data/hooks/useFormSubmit.ts'
 import { useFormToasts } from '@libs/form-data/hooks/useFormToasts.tsx'
@@ -54,9 +55,9 @@ import validators = ProfilePageValidation.validators
 import defaultValues = ProfilePageValidation.defaultValues
 import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
-import { ValueOrMapper } from '@utils/base/typeUtils.ts'
-import { isfunction } from '@utils/base/typeUtils.ts'
-import { isdef } from '@utils/base/typeUtils.ts'
+import { ValueOrMapper } from '@utils/base/tsUtils.ts'
+import { isfunction } from '@utils/base/tsUtils.ts'
+import { isdef } from '@utils/base/tsUtils.ts'
 
 
 
@@ -258,17 +259,17 @@ const ProfilePage = React.memo(() => {
         
         setFormValues(form => ({ ...form,
           initialValues: { ...form.initialValues,
-            photos: arrMapOneToIf({
-              arr: form.initialValues.photos,
-              filter: elem => elem.id === photo.id,
-              mapper: elem => ({ ...elem, ...downloadStart }),
-            }),
+            photos: arrMapOneToIf(
+              form.initialValues.photos,
+              elem => elem.id === photo.id,
+              elem => ({ ...elem, ...downloadStart }),
+            ),
           },
-          photos: arrMapOneToIf({
-            arr: form.photos,
-            filter: elem => elem.id === photo.id,
-            mapper: elem => ({ ...elem, ...downloadStart }),
-          }),
+          photos: arrMapOneToIf(
+            form.photos,
+            elem => elem.id === photo.id,
+            elem => ({ ...elem, ...downloadStart }),
+          ),
         }))
         
         const updatePhoto = (
@@ -277,27 +278,27 @@ const ProfilePage = React.memo(() => {
         ) => {
           setFormValues(form => ({ ...form,
             initialValues: { ...form.initialValues,
-              photos: arrMapOneToIf({
-                arr: form.initialValues.photos,
-                filter: elem => elem.download?.id === downloadStart.download.id,
-                mapper: photo => ({ ...photo,
+              photos: arrMapOneToIf(
+                form.initialValues.photos,
+                elem => elem.download?.id === downloadStart.download.id,
+                photo => ({ ...photo,
                   ...photoUpdate,
                   ...downloadUpdate && photo.download && {
                     download: { ...photo.download, ...downloadUpdate },
                   },
                 }),
-              }),
+              ),
             },
-            photos: arrMapOneToIf({
-              arr: form.photos,
-              filter: elem => elem.download?.id === downloadStart.download.id,
-              mapper: photo => ({ ...photo,
+            photos: arrMapOneToIf(
+              form.photos,
+              elem => elem.download?.id === downloadStart.download.id,
+              photo => ({ ...photo,
                 ...photoUpdate,
                 ...downloadUpdate && photo.download && {
                   download: { ...photo.download, ...downloadUpdate },
                 },
               }),
-            }),
+            ),
           }))
         }
         const updatePhotoThrottled = withThrottle(
@@ -314,7 +315,7 @@ const ProfilePage = React.memo(() => {
             }
             
             //console.log('start download id',photo.id)
-            const blob = await fetchToBlob(photo.remoteUrl, {
+            const blob = await axiosToBlob(photo.remoteUrl, {
               onProgress, abortCtrl: fetchToBlobAbortCtrl,
             })
             abortCtrl.signal.throwIfAborted()

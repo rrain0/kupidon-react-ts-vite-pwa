@@ -1,4 +1,4 @@
-import { useBool } from 'src/utils/state/react/base/useBool.ts'
+import { useBool } from 'src/utils/state/react/useBool.ts'
 
 
 export const useTriggerRerender = () => {

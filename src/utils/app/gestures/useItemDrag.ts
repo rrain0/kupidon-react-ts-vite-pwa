@@ -8,8 +8,8 @@ import { useWasGesture } from 'src/utils/app/gestures/useWasGesture.ts'
 import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
 import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
 import { useStateAndRef } from 'src/utils/state/react/base/useStateAndRef.ts'
-import { Pu } from 'src/utils/base/typeUtils.ts'
-import { Cb } from 'src/utils/base/typeUtils.ts'
+import { Pu } from 'src/utils/base/tsUtils.ts'
+import { Cb } from 'src/utils/base/tsUtils.ts'
 
 
 

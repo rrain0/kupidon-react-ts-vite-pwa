@@ -9,12 +9,12 @@ import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { Cb } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 import col = EmotionCommon.col
-import { Setter } from '@utils/base/typeUtils.ts'
+import { Setter } from '@utils/base/tsUtils.ts'
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
 import Txt = EmotionCommon.Txt
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

@@ -4,7 +4,7 @@ import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Contents from '@libs/short-propsed/components/Contents.tsx'
 
 import { useAppZustand } from 'src/zustand/app/appZustand.ts'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 import contents = EmotionCommon.contents
 
 

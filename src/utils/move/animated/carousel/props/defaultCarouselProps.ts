@@ -1,5 +1,5 @@
 import { rf3, rf5, mod } from 'src/utils/base/math/mathUtils.ts'
-import { Sign } from 'src/utils/base/typeUtils.ts'
+import { Sign } from 'src/utils/base/tsUtils.ts'
 import {
   GetCarouselProps, getIndexesProps, MergeProgressCallback
 } from 'src/utils/move/animated/carousel/props/carouselPropsCommon.ts'

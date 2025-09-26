@@ -9,8 +9,8 @@ import {
 } from 'src/components/elems/inputs/CheckboxInputGroup/CheckboxInputGroupStyle.ts'
 import reset = EmotionCommon.reset
 import absTlwh = EmotionCommon.absTlwh
-import { Pu } from '@utils/base/typeUtils.ts'
-import { toEmptyAttr } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { toEmptyAttr } from '@utils/base/tsUtils.ts'
 
 
 

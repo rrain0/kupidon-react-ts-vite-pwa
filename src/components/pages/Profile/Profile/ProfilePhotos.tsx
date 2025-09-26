@@ -39,7 +39,7 @@ import {
   arrReplaceOneToIfBy,
   arrMapOneToIf,
   arrHasAny,
-} from '@utils/base/array/arrayUtils.ts'
+} from '@utils/base/arrayUtils.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { blobToDataUrl } from '@utils/bin/binDataUtils.ts'
@@ -56,7 +56,7 @@ import { useAppZustand } from 'src/zustand/app/appZustand.ts'
 import bgBorderMask = EmotionCommon.bgInBorder
 import PlusIc from 'src/components/elems/icons/SvgIcons/pack/ui/PlusIc.tsx'
 import * as uuid from 'uuid'
-import { Cb, SetterOrUpdater } from '@utils/base/typeUtils.ts'
+import { Cb, SetterOrUpdater } from '@utils/base/tsUtils.ts'
 import Theme = AppTheme.Theme
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
 
@@ -598,16 +598,16 @@ const onFilesSelectedBuilder = (
           photoUpdate?: Partial<MediaInArrayDUC>,
           compressionUpdate?: Partial<MediaOperation>,
         ) => {
-          setImages(images => arrMapOneToIf({
-            arr: images,
-            filter: image => image.conversion?.id === compressionStart.conversion.id,
-            mapper: image => ({ ...image,
+          setImages(images => arrMapOneToIf(
+            images,
+            image => image.conversion?.id === compressionStart.conversion.id,
+            image => ({ ...image,
               ...photoUpdate,
               ...compressionUpdate && image.conversion && {
                 conversion: { ...image.conversion, ...compressionUpdate },
               },
             }),
-          }))
+          ))
         }
         const updatePhotoThrottled = withThrottle(
           random(1500, 2300), updatePhoto

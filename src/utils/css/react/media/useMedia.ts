@@ -1,6 +1,7 @@
 import { useLayoutEffect, useState } from 'react'
 
 
+
 export const useMedia = (media: string) => {
   
   const [mediaQuery, setMediaQuery] = useState(() => window.matchMedia(media))

@@ -1,6 +1,6 @@
-import { trimDotZerosEnd } from '@utils/base/stringUtils.ts'
+import { trimDotZerosEnd } from '@utils/string/stringUtils.ts'
 import React from 'react'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

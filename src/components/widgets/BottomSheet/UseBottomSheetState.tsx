@@ -6,8 +6,8 @@ import {
   SheetSnapPoints, SheetSnapsHalfScreen,
   SheetState, UseBottomSheetOptions,
 } from 'src/components/widgets/BottomSheet/useBottomSheet.ts'
-import { Cb } from '@utils/base/typeUtils.ts'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

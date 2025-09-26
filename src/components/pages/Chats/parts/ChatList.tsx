@@ -3,7 +3,7 @@ import { createSpring, createSpringAnimation } from '@animated/SpringAnimation.t
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import styled from '@emotion/styled'
 import { Spring2DAnimationData, useItemDrag } from '@utils/app/gestures/useItemDrag.ts'
-import { diff } from '@utils/base/array/arrayDiffUtils.ts'
+import { diff } from '@utils/array/arrayDiffUtils.ts'
 import { useNoTouchAction } from '@utils/move/pointer/useNoTouchAction.ts'
 import { useArray } from '@utils/state/react/useArray.ts'
 import { useAsCallback } from '@utils/state/react/base/useAsCallback.ts'
@@ -20,9 +20,9 @@ import ChatListToItem from 'src/components/pages/Chats/parts/ChatListToItem.tsx'
 import { ChatListItemWidgetData } from 'src/components/pages/Chats/parts/ChatListItemWidget.tsx'
 import { offsetToPageContentPaddings }
   from 'src/components/components/page/offsetToPageContentPaddings.ts'
-import { Pu } from '@utils/base/typeUtils.ts'
-import { isundef } from '@utils/base/typeUtils.ts'
-import { isdef } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { isundef } from '@utils/base/tsUtils.ts'
+import { isdef } from '@utils/base/tsUtils.ts'
 
 
 

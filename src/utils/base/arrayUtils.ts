@@ -1,17 +1,17 @@
 import {
   type ComparatorEq,
   defaultComparatorEq, defaultFilter,
-  type emptyval, type Filter,
+  type emptyval,
   isArray, isundef,
-} from 'src/utils/base/typeUtils.ts'
+} from 'src/utils/base/tsUtils.ts'
 
 
 
 export type ArrElem<ArrayType extends readonly unknown[]> = (
   ArrayType extends readonly (infer ElementType)[] ? ElementType : never
 )
-export type ArrMapper<In, Out = In> = (v: In, i: number, arr: In[]) => Out
 export type ArrFilter<T> = (v: T, i: number, arr: T[]) => any
+export type ArrMapper<In, Out = In> = (v: In, i: number, arr: In[]) => Out
 
 
 
@@ -44,18 +44,14 @@ export const arrHasntAny = (arr: readonly any[], value: any): boolean => (
 
 
 export const lastI = (arr: readonly any[]) => arr.length - 1
+
 export const lastIOr0 = (arr: readonly any[]) => arr.length ? (arr.length - 1) : 0
 
-
-
-export const last = <T>(arr: readonly T[]): T => {
-  if (!arr.length) throw new Error("Array is empty, can't get last element.")
-  return arr[arr.length - 1]
-}
-export const lastOr = <T1, T2>(arr: readonly T1[], orElse: T2): T1 | T2 => {
+export const lastOr = <T, E>(arr: readonly T[], orElse: E): T | E => {
   if (!arr.length) return orElse
   return arr[arr.length - 1]
 }
+
 export const arrSetLast = <T>(arr: T[], last: T) => {
   arr[Math.max(arr.length - 1, 0)] = last
 }
@@ -81,6 +77,19 @@ export const arrEq = <A, B>(
     if (!valueComparator(arr1[i], arr2[i])) return false
   }
   return true
+}
+
+
+
+export const arrFindLast = <T>(
+  arr: T[] | undefined | null,
+  filter: NoInfer<ArrFilter<T>>,
+): T | undefined => {
+  if (arr) for (let i = arr.length - 1; i >= 0; i--) {
+    const elem = arr[i]
+    if (filter(elem, i, arr)) return elem
+  }
+  return undefined
 }
 
 
@@ -118,7 +127,7 @@ export const arrAddUniqToIf = <T>(arr: T[], elem: T): T[] => {
 export const arrReplaceOneToIfBy = <T>(
   arr: T[],
   elem: NoInfer<T>,
-  filter: ArrFilter<NoInfer<T>> = defaultFilter,
+  filter: NoInfer<ArrFilter<T>> = defaultFilter,
 ): T[] => {
   const i = arr.findIndex(filter)
   if (i === -1) return arr
@@ -127,8 +136,8 @@ export const arrReplaceOneToIfBy = <T>(
 
 export const arrMapOneIfBy = <T>(
   arr: T[],
-  filter: ArrFilter<NoInfer<T>>,
-  mapper: ArrMapper<NoInfer<T>, T>,
+  filter: NoInfer<ArrFilter<T>>,
+  mapper: NoInfer<ArrMapper<T, T>>,
 ): T[] => {
   const i = arr.findIndex(filter)
   if (i === -1) return arr
@@ -138,10 +147,10 @@ export const arrMapOneIfBy = <T>(
   return arr.toSpliced(i, 1, newElem)
 }
 
-export const arrMapOrRemoveOneIfBy = <T>(
+export const arrMapOneOrRemoveIfBy = <T>(
   arr: T[],
-  filter: ArrFilter<NoInfer<T>>,
-  mapper: ArrMapper<NoInfer<T>, T | undefined>,
+  filter: NoInfer<ArrFilter<T>>,
+  mapper: NoInfer<ArrMapper<T, T | undefined>>,
 ): T[] => {
   const i = arr.findIndex(filter)
   if (i === -1) return arr
@@ -152,15 +161,65 @@ export const arrMapOrRemoveOneIfBy = <T>(
   return arr.toSpliced(i, 1, newElem)
 }
 
-export const arrMapOneToEndOrAddToIfBy = <T>(
+export function arrMapOneToEndToIf<In, Out = In>(
+  arr: In[],
+  filter: NoInfer<ArrFilter<In>>,
+  mapper: ArrMapper<NoInfer<In>, Out>,
+): (In | Out)[] {
+  const i = arr.findIndex(filter)
+  if (i === -1) return arr
+  const elem = arr[i]
+  const newElem = mapper(elem, i, arr)
+  if (newElem === elem as any) return arr
+  return [...arr.slice(0, i), ...arr.slice(i + 1), newElem]
+}
+
+export function arrMapOneToIf<In, Out = In>(
+  arr: In[],
+  filter: NoInfer<ArrFilter<In>>,
+  mapper: ArrMapper<NoInfer<In>, Out>
+): (In | Out)[]
+export function arrMapOneToIf<In, Out = In>(
+  arr: In[] | undefined,
+  filter: NoInfer<ArrFilter<In>>,
+  mapper: ArrMapper<NoInfer<In>, Out>
+): (In | Out)[] | undefined
+export function arrMapOneToIf<In, Out = In>(
+  arr: In[] | undefined,
+  filter: NoInfer<ArrFilter<In>>,
+  mapper: ArrMapper<NoInfer<In>, Out>,
+): (In | Out)[] | undefined {
+  if (!arr) return arr
+  const i = arr.findIndex(filter)
+  if (i === -1) return arr
+  const elem = arr[i]
+  const newElem = mapper(elem, i, arr)
+  if (newElem === elem as any) return arr
+  return (arr as (In | Out)[]).toSpliced(i, 1, newElem)
+}
+
+export const arrMapOneOrAddToIfBy = <T>(
   arr: T[],
-  filter: ArrFilter<NoInfer<T>>,
-  mapper: ArrMapper<NoInfer<T> | undefined, T>,
+  filter: NoInfer<ArrFilter<T>>,
+  mapper: NoInfer<ArrMapper<T | undefined, T>>,
 ): T[] => {
   const i = arr.findIndex(filter)
   if (i === -1) return [...arr, mapper(undefined, arr.length, arr)]
   const elem = arr[i]
-  const newElem = mapper(elem, arr.length, arr)
+  const newElem = mapper(elem, i, arr)
+  if (elem === newElem) return arr
+  return [...arr.slice(0, i), newElem, ...arr.slice(i + 1)]
+}
+
+export const arrMapOneToEndOrAddToIfBy = <T>(
+  arr: T[],
+  filter: NoInfer<ArrFilter<T>>,
+  mapper: NoInfer<ArrMapper<T | undefined, T>>,
+): T[] => {
+  const i = arr.findIndex(filter)
+  if (i === -1) return [...arr, mapper(undefined, arr.length, arr)]
+  const elem = arr[i]
+  const newElem = mapper(elem, i, arr)
   if (elem === newElem) return arr
   return [...arr.slice(0, i), ...arr.slice(i + 1), newElem]
 }
@@ -194,13 +253,13 @@ export const arrRemoveToIf = <T>(arr: T[], elem: T): T[] => {
   return arr.toSpliced(i, 1)
 }
 
-export const arrRemoveBy = <T>(arr: T[], filter: ArrFilter<T>): T[] => {
+export const arrRemoveBy = <T>(arr: T[], filter: NoInfer<ArrFilter<T>>): T[] => {
   const i = arr.findIndex(filter)
   if (i !== -1) arr.splice(i, 1)
   return arr
 }
 
-export const arrRemoveByToIf = <T>(arr: T[], filter: ArrFilter<T>): T[] => {
+export const arrRemoveByToIf = <T>(arr: T[], filter: NoInfer<ArrFilter<T>>): T[] => {
   const i = arr.findIndex(filter)
   if (i === -1) return arr
   return arr.toSpliced(i, 1)
@@ -209,30 +268,10 @@ export const arrRemoveByToIf = <T>(arr: T[], filter: ArrFilter<T>): T[] => {
 
 
 
-export function arrMapOneToIf<In, Out = In>(params: {
-  arr: In[], filter: Filter<NoInfer<In>>, mapper: ArrMapper<In, Out>
-}): (In | Out)[]
-export function arrMapOneToIf<In, Out = In>(params: {
-  arr: In[] | undefined, filter: Filter<NoInfer<In>>, mapper: ArrMapper<In, Out>
-}): (In | Out)[] | undefined
-export function arrMapOneToIf<In, Out = In>({
-  arr, mapper, filter,
-}: {
-  arr: In[] | undefined, filter: Filter<NoInfer<In>>, mapper: ArrMapper<In, Out>
-}): (In | Out)[] | undefined {
-  if (!arr) return arr
-  const i = arr.findIndex(filter)
-  if (i === -1) return arr
-  const elem = arr[i]
-  const mapped = mapper(elem, i, arr)
-  if (mapped === elem as any) return arr
-  return (arr as (In | Out)[]).toSpliced(i, 1, mapped)
-}
 
 
 
-
-export const arrFilterToIf = <T>(arr: T[], filter: ArrFilter<T>): T[] => {
+export const arrFilterToIf = <T>(arr: T[], filter: NoInfer<ArrFilter<T>>): T[] => {
   const newArr = arr.filter(filter)
   if (newArr.length === arr.length) return arr
   return newArr
@@ -251,28 +290,38 @@ export const arrDistinctToIf = <T>(arr: T[]): T[] => {
 
 export function arrMapToIf<In, Out = In>(
   arr: In[],
-  mapper: ArrMapper<In, Out>
+  mapper: ArrMapper<NoInfer<In>, Out>
 ): Out[]
 export function arrMapToIf<In, Out = In>(
   arr: In[] | undefined,
-  mapper: ArrMapper<In, Out>
+  mapper: ArrMapper<NoInfer<In>, Out>
 ): Out[] | undefined
 export function arrMapToIf<In, Out = In>(
   arr: In[] | undefined,
-  mapper: ArrMapper<In, Out>
+  mapper: ArrMapper<NoInfer<In>, Out>
 ): Out[] | undefined {
   if (!arr) return undefined
   let newArr: any[] = arr
-  arr.forEach((el, i) => {
+  for (let i = 0; i < arr.length; i++) {
+    const el = arr[i]
     const newEl = mapper(el, i, arr)
     if (newEl !== el as any) {
       if (newArr === arr) newArr = [...arr]
       newArr[i] = newEl
     }
-  })
+  }
   return newArr
 }
 
+export function arrMapFilterToIf<In, Out = In>(
+  arr: In[],
+  mapperFilter: ArrMapper<NoInfer<In>, Out | undefined>,
+): Out[] {
+  const mapped = arrMapToIf(arr, mapperFilter)
+  const filtered = mapped.filter(it => it !== undefined)
+  if (filtered.length === mapped.length) return mapped as Out[]
+  return filtered as Out[]
+}
 
 
 export const arrClear = <T>(arr: T[]): T[] => {

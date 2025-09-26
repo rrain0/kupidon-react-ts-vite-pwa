@@ -5,7 +5,7 @@ import {
   getFixedForwardLoopedCarouselProps,
 } from '@utils/move/animated/carousel/props/fixedCarouselProps.ts'
 import { useCarousel } from '@utils/move/animated/carousel/useCarousel.ts'
-import { arrOfIndices } from '@utils/base/array/arrayUtils.ts'
+import { arrOfIndices } from '@utils/base/arrayUtils.ts'
 import { rf3 } from '@utils/base/math/mathUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { useStateAndRef } from '@utils/state/react/base/useStateAndRef.ts'
@@ -18,8 +18,8 @@ import Flex from '@libs/short-propsed/components/Flex.tsx'
 import ProfileCards, {
   ProfileCardsAction,
 } from 'src/components/widgets/ProfileCards/ProfileCards.tsx'
-import { Pu } from '@utils/base/typeUtils.ts'
-import { isdef } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { isdef } from '@utils/base/tsUtils.ts'
 
 
 

@@ -10,7 +10,7 @@ import Flex from '@libs/short-propsed/components/Flex.tsx'
 import ProfileCards from 'src/components/widgets/ProfileCards/ProfileCards.tsx'
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

@@ -15,9 +15,9 @@ import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import { Pu } from '@utils/base/typeUtils.ts'
-import { Mapper } from '@utils/base/typeUtils.ts'
-import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { Mapper } from '@utils/base/tsUtils.ts'
+import { SetterOrUpdater } from '@utils/base/tsUtils.ts'
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
 
 

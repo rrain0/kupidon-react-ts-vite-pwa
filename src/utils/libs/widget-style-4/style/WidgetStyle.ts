@@ -1,9 +1,10 @@
-import { uncapitalize, camelCaseToKebabCase } from 'src/utils/base/stringUtils.ts'
+import { uncapitalize } from 'src/utils/base/stringUtils.ts'
 import { CssElem } from '@libs/widget-style-4/css/CssElem.ts'
 import { CssPseudos } from '@libs/widget-style-4/css/CssPseudo.ts'
 import { useThis } from '@libs/widget-style-4/css/CssState.ts'
 import { transformers } from '@libs/widget-style-4/style/Transformers.ts'
 import { CssWidget } from '@libs/widget-style-4/widget/CssWidget.ts'
+import { camelCaseToKebabCase } from 'src/utils/string/namingCaseUtils.ts'
 
 
 

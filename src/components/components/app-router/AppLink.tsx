@@ -3,12 +3,12 @@ import React, { useMemo } from 'react'
 import { ReactU } from '@utils/react/ReactU.ts'
 import { Link, useSearchParams } from 'react-router'
 import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 import RouteSegment = RouteBuilder.RouteSegment
 import fullParams = RouteBuilder.fullParams
 import AllowedNameParams = RouteBuilder.AllowedNameParams
 import AllowedNameParamsRoutes = RouteBuilder.AllowedNameParamsRoutes
-import { isobject } from '@utils/base/typeUtils.ts'
+import { isobject } from '@utils/base/tsUtils.ts'
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import AnyParams = RouteBuilder.AnyParams
 

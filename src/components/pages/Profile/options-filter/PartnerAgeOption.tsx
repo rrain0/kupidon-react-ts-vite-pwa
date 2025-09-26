@@ -1,4 +1,4 @@
-import { mergeMappedIf } from '@utils/base/array/arrayDiffUtils.ts'
+import { mergeMappedIf } from '@utils/array/arrayDiffUtils.ts'
 import HourglassGradIc
   from 'src/components/elems/icons/GradSvgIcons/pack/special/HourglassGradIc.tsx'
 import { useStateMapperSync } from '@utils/state/react/useStateMapperSync.ts'

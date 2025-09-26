@@ -42,8 +42,8 @@ import FormFieldWrap from '@libs/form-data/components/FormFieldWrap.tsx'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
-import { Cb1 } from '@utils/base/typeUtils.ts'
-import { Cb } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/tsUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 
 

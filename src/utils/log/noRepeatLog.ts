@@ -1,4 +1,4 @@
-import { arrEq } from 'src/utils/base/array/arrayUtils.ts'
+import { arrEq } from 'src/utils/base/arrayUtils.ts'
 import { stringifyEq } from 'src/utils/base/jsUtils.ts'
 
 

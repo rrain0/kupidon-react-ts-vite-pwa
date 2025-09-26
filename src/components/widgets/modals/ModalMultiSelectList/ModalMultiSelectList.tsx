@@ -24,12 +24,12 @@ import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomShee
 import ModalInput from 'src/components/widgets/modals/ModalInput/ModalInput'
 import { ReactU } from 'src/utils/react/ReactU'
 
-import { Cb } from '@utils/base/typeUtils.ts'
-import { Setter } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
+import { Setter } from '@utils/base/tsUtils.ts'
 import col = EmotionCommon.col
-import { Pu } from '@utils/base/typeUtils.ts'
-import { emptyArr } from '@utils/base/typeUtils.ts'
-import { Cb1 } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { emptyArr } from '@utils/base/tsUtils.ts'
+import { Cb1 } from '@utils/base/tsUtils.ts'
 
 
 

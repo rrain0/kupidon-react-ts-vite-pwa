@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { ObjectStringKeys, objectMap } from 'src/utils/base/ObjectU.ts'
-import { RecordRo } from 'src/utils/base/typeUtils.ts'
-import { isdef } from 'src/utils/base/typeUtils.ts'
+import { RecordRo } from 'src/utils/base/tsUtils.ts'
+import { isdef } from 'src/utils/base/tsUtils.ts'
 
 
 

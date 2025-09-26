@@ -1,5 +1,5 @@
 import { rangeClamp } from 'src/utils/base/math/rangeUtils.ts'
-import { defaultFilter, type Filter } from 'src/utils/base/typeUtils.ts'
+import { defaultFilter, type Filter } from 'src/utils/base/tsUtils.ts'
 
 
 

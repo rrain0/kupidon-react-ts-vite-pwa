@@ -7,7 +7,7 @@ import { useUpNodesScrollLock } from '@utils/move/pointer/useUpNodesScrollLock.t
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 import combineProps = ReactU.combineProps
 import fixedBottom = EmotionCommon.fixedBottom
 import modalFloor1k = StyleVals.modalFloor1k

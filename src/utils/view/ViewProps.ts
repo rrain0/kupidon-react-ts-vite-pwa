@@ -1,6 +1,6 @@
-import { RecordRo } from 'src/utils/base/typeUtils.ts'
-import { Pu } from 'src/utils/base/typeUtils.ts'
-import { isdef } from 'src/utils/base/typeUtils.ts'
+import { RecordRo } from 'src/utils/base/tsUtils.ts'
+import { Pu } from 'src/utils/base/tsUtils.ts'
+import { isdef } from 'src/utils/base/tsUtils.ts'
 import type { WH } from 'src/utils/css/cssUtils.ts'
 
 

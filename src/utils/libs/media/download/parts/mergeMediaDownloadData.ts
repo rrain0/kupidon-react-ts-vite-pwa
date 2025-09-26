@@ -1,7 +1,7 @@
 
 import { MediaDownloadable } from '@libs/media/Media.ts'
-import { isundef } from 'src/utils/base/typeUtils.ts'
-import { isdef } from 'src/utils/base/typeUtils.ts'
+import { isundef } from 'src/utils/base/tsUtils.ts'
+import { isdef } from 'src/utils/base/tsUtils.ts'
 
 
 

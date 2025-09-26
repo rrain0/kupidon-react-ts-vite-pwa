@@ -6,7 +6,7 @@ import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomShee
 import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomSheetState.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 
-import { Setter } from '@utils/base/typeUtils.ts'
+import { Setter } from '@utils/base/tsUtils.ts'
 import col = EmotionCommon.col
 
 

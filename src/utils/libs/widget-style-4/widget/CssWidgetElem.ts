@@ -2,7 +2,7 @@
 import { CssElem, StateToValue } from '@libs/widget-style-4/css/CssElem.ts'
 import { CssProp } from '@libs/widget-style-4/css/CssProp.ts'
 import { CssState } from '@libs/widget-style-4/css/CssState.ts'
-import { RecordRo } from 'src/utils/base/typeUtils.ts'
+import { RecordRo } from 'src/utils/base/tsUtils.ts'
 
 
 

@@ -3,9 +3,9 @@ import { AnimatedComputed } from '@libs/animated/AnimatedComputed.ts'
 import {
   AnimatedProperty, AnimatedPropsFromValues, AnimatedPropsToValues,
 } from '@libs/animated/AnimatedProperty.ts'
-import { Mapper } from 'src/utils/base/typeUtils.ts'
-import { Cb1 } from 'src/utils/base/typeUtils.ts'
-import { MapperN } from 'src/utils/base/typeUtils.ts'
+import { Mapper } from 'src/utils/base/tsUtils.ts'
+import { Cb1 } from 'src/utils/base/tsUtils.ts'
+import { MapperN } from 'src/utils/base/tsUtils.ts'
 
 
 

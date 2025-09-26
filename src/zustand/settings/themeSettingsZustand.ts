@@ -3,9 +3,9 @@ import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { DefaultDarkTheme, DefaultLightTheme } from 'src/styles/themes/ThemesCollection.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import { isobject } from '@utils/base/typeUtils.ts'
-import { isnonemptyval } from '@utils/base/typeUtils.ts'
-import { isemptyval } from '@utils/base/typeUtils.ts'
+import { isobject } from '@utils/base/tsUtils.ts'
+import { isnotnullundef } from '@utils/base/tsUtils.ts'
+import { isnullundef } from '@utils/base/tsUtils.ts'
 
 
 
@@ -15,7 +15,7 @@ const zustandLsName = 'zustandThemeSettings'
 
 const recoilLsName = 'themeSettings'
 // To trigger Zustand update from Recoil to Zustand
-if (isemptyval(localStorage.getItem(zustandLsName)) && isnonemptyval(localStorage.getItem(recoilLsName))) {
+if (isnullundef(localStorage.getItem(zustandLsName)) && isnotnullundef(localStorage.getItem(recoilLsName))) {
   localStorage.setItem(zustandLsName, JSON.stringify({ version: -1 }))
 }
 
@@ -48,7 +48,7 @@ export const useThemeSettingsZustand = create<ThemeSettingsZustand>()(persist(
       if (persistedVersion <= 0) {
         const oldRaw = localStorage.getItem(recoilLsName)
         localStorage.removeItem(recoilLsName)
-        const old = isnonemptyval(oldRaw) ? JSON.parse(oldRaw) : undefined
+        const old = isnotnullundef(oldRaw) ? JSON.parse(oldRaw) : undefined
         if (isobject(old)) {
           persisted = old
         }

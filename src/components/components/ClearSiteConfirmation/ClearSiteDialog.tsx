@@ -12,7 +12,7 @@ import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { clearSiteData } from '@utils/js/clearSiteData.ts'
 
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
-import { useBool } from '@utils/state/react/base/useBool.ts'
+import { useBool } from '@utils/state/react/useBool.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import fixed = EmotionCommon.fixed
 import flexC = EmotionCommon.flexC
@@ -20,7 +20,7 @@ import row = EmotionCommon.row
 import Theme = AppTheme.Theme
 import { SvgIconS } from 'src/components/elems/icons/SvgIcons/SvgIconS.ts'
 import Txt = EmotionCommon.Txt
-import { Cb } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/tsUtils.ts'
 
 
 

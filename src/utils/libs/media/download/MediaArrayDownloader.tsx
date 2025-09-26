@@ -1,4 +1,4 @@
-import { arrMapToIf } from 'src/utils/base/array/arrayUtils.ts'
+import { arrMapToIf } from 'src/utils/base/arrayUtils.ts'
 import React, { useEffect, useState } from 'react'
 import {
   mergeMediaDownloadData
@@ -9,7 +9,7 @@ import {
 import { MediaDownloadable } from '@libs/media/Media.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 
-import { Pu } from 'src/utils/base/typeUtils.ts'
+import { Pu } from 'src/utils/base/tsUtils.ts'
 
 
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import ChatMessage, { ChatMessageUi } from 'src/components/pages/Chat/parts/ChatMessage.tsx'
-import { Pu } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
 
 
 

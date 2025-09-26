@@ -5,9 +5,9 @@ import { StyleVals } from 'src/styles/StyleVals.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import Grid from '@libs/short-propsed/components/Grid.tsx'
 import BackButton from 'src/components/components/screen-bars/parts/BackButton.tsx'
-import { Pu } from '@utils/base/typeUtils.ts'
-import { isdef } from '@utils/base/typeUtils.ts'
-import { isundef } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/tsUtils.ts'
+import { isdef } from '@utils/base/tsUtils.ts'
+import { isundef } from '@utils/base/tsUtils.ts'
 import modalFloor100 = StyleVals.modalFloor100
 
 
