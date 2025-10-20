@@ -1,7 +1,7 @@
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
 
-import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
+import { flexStyle } from '@libs/style-as-short-props/style/flexStyle.ts'
 import React from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'

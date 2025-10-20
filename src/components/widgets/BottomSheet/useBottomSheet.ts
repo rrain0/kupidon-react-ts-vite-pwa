@@ -7,7 +7,7 @@ import React, {
   useMemo, useRef,
   useState,
 } from 'react'
-import { lastI } from '@utils/base/arrayUtils.ts'
+import { lastI } from '@utils/base/array/arrayUtils.ts'
 import { ViewProps } from 'src/utils/view/ViewProps.ts'
 import { rangeClamp, rangeHas } from '@utils/base/math/rangeUtils.ts'
 import { useNoSelect } from '@utils/move/pointer/useNoSelect.ts'

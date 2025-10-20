@@ -1,12 +1,9 @@
+import type { ApiResponse, ResponseError } from 'src/utils/libs/api/response/apiResponseCore.ts'
 import { useAsRefGet } from 'src/utils/state/react/base/useAsRefGet.ts'
 import { useCallback, useEffect, useState } from 'react'
-import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import { useAsyncEffect } from '@utils/react/useAsyncEffect.ts'
 import Values = ValidationCore.Values
-import ApiResponse = ApiResponseUtils.ApiResponse
-import ResponseError = ApiResponseUtils.ResponseError
-
 
 
 

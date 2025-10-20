@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { useBool } from '@utils/state/react/useBool.ts'
+import { useBool0 } from '@utils/state/react/useBool0.ts'
 import React, { useEffect } from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
@@ -12,7 +12,7 @@ import rotateAnim = EmotionCommon.rotateAnim
 
 
 export const RefreshPageButton = React.memo(() => {
-  const [isReloading, reload] = useBool(false)
+  const [isReloading, reload] = useBool0(false)
   
   useEffect(() => {
     if (isReloading) window.location.reload()

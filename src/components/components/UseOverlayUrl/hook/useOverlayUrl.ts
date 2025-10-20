@@ -1,5 +1,5 @@
 
-import { useBool } from '@utils/state/react/useBool.ts'
+import { useBool0 } from '@utils/state/react/useBool0.ts'
 import { useSearchParamValue } from '@utils/url/useSearchParamValue.ts'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
@@ -70,7 +70,7 @@ export const _useOverlayUrl = (overlayName: string) => {
   
   
   
-  const [needClose, enableClose, disableClose] = useBool(false)
+  const [needClose, enableClose, disableClose] = useBool0(false)
   
   useEffect(() => {
     disableClose()

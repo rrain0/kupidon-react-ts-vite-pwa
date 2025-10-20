@@ -1,7 +1,7 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import { css } from '@emotion/react'
-import { arr } from '@utils/base/arrayUtils.ts'
+import { array } from '@utils/base/array/arrayCreateUtils.ts'
 import { rf3 } from '@utils/base/math/mathUtils.ts'
 import { rangeLoop, rangeMapClamp } from '@utils/base/math/rangeUtils.ts'
 import React from 'react'
@@ -43,7 +43,7 @@ export const DotsScrollIndicator = React.memo((props: DotsScrollIndicatorProps) 
     >
       <div css={frame2S}>
         <div css={frame3S}>
-          {arr(cnt).map((_, i) => (
+          {array(cnt).map((_, i) => (
             <AnimatedDiv
               key={i}
               css={dotS}

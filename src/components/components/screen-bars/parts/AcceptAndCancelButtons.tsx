@@ -3,7 +3,7 @@ import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import React, { useEffect, useState } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 
-import Flex from '@libs/short-propsed/components/Flex.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
 import MountController, { MountControllerRenderProps } from 'src/components/components/animations/MountController.tsx'
 import AcceptButton from 'src/components/components/screen-bars/parts/AcceptButton.tsx'
 import CancelButton from 'src/components/components/screen-bars/parts/CancelButton.tsx'

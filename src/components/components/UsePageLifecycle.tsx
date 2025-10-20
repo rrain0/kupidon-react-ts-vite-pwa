@@ -1,4 +1,4 @@
-import { arrRemove } from '@utils/base/arrayUtils.ts'
+import { arrRemove } from '@utils/base/array/arrayUtils.ts'
 import React, { useEffect } from 'react'
 import { useAppZustand } from 'src/zustand/app/appZustand.ts'
 

@@ -37,18 +37,3 @@ a {
   display: contents;
 }
 
-
-/* :where() nullifies specifity so you can override style further locally */
-/* :where(*,::before,::after) doesn't work */
-:where(#root) *,::before,::after {
-  display: flex;
-}
-
-
-
-
-
-
-
-
-

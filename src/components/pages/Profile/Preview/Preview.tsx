@@ -1,7 +1,7 @@
 import React from 'react'
 import { GenderA } from 'src/models/api/GenderA.ts'
 import { MediaInArrayDUC } from '@libs/media/Media.ts'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
 import ProfileCards from 'src/components/widgets/ProfileCards/ProfileCards.tsx'
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
 

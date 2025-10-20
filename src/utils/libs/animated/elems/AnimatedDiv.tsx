@@ -7,7 +7,7 @@ import { AnimatedElemStyle, AnimatedElemAttrs } from '@libs/animated/AnimatedPro
 import {
   useUpdateElemStyleUpdaters, useUpdateElemAttrsUpdaters,
 } from '@libs/animated/animatedUpdaters.ts'
-import Flex from 'src/utils/libs/short-propsed/components/Flex.tsx'
+import Flex from 'src/utils/libs/style-as-short-props/elems/Flex.tsx'
 import { Pu } from 'src/utils/base/tsUtils.ts'
 
 

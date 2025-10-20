@@ -64,6 +64,10 @@ export type RecordPuro<K extends keyof any, T> = {
 }
 
 
+
+export type AllOrNone<O extends object> = O | {
+  [Prop in keyof O]?: undefined
+}
 // TODO костыль - ts костыль фиксит взятие необязательных свойств объединённых объектов
 export type ObjectUnionFix<O1 extends object, O2 extends object> =
   | O1 & { [OptKeys in keyof Omit<O2, keyof O1>]: undefined }

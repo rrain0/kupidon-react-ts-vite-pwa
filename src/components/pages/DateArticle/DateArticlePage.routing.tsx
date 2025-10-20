@@ -4,7 +4,7 @@ import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
 import { DateArticlesData } from 'src/configs/date-article/DateArticlesData.ts'
 import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
 import AppNavigate from 'src/components/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path

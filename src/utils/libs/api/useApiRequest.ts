@@ -1,11 +1,8 @@
-
+import type { ApiResponse, ResponseError } from 'src/utils/libs/api/response/apiResponseCore.ts'
 import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
 import { useStateAndRef } from 'src/utils/state/react/base/useStateAndRef.ts'
 import { useState } from 'react'
-import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
-import ResponseError = ApiResponseUtils.ResponseError
-import ApiResponse = ApiResponseUtils.ApiResponse
-import { Cb } from 'src/utils/base/tsUtils.ts'
+import { type Cb } from 'src/utils/base/tsUtils.ts'
 
 
 
@@ -19,13 +16,12 @@ export const useApiRequest = <D, E extends ResponseError>(
   // то надо отменить текущий запрос и сделать новый
   request: () => Promise<ApiResponse<D, E>>
 ) => {
-  const { get: getIsLoading, set: setIsLoading, state: isLoading } = (
+  const { get: getIsLoading, set: setIsLoading, state: isLoading } =
     useStateAndRef(false)
-  )
   
-  const [result, setResult] = (
+  const [result, setResult] =
     useState<{ data: D } | { error: E } | undefined>(undefined)
-  )
+  
   
   
   const startRequest = useAsCallback(async () => {

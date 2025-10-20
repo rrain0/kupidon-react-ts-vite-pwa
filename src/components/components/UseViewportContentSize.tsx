@@ -6,7 +6,7 @@ import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React, { useState } from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import Contents from '@libs/short-propsed/components/Contents.tsx'
+import Contents from '@libs/style-as-short-props/elems/Contents.tsx'
 import fixed = EmotionCommon.fixed
 import Children = ReactU.Children
 
@@ -24,8 +24,8 @@ const UseViewportContentSize = React.memo(({ children }: Children) => {
   const vpSzFunRef = useResizeRef(el => {
     let w = 0, h = 0
     if (el) { ({ w, h } = getViewProps(el)) }
-    if (w || h) setReady(true)
     setWh({ w, h })
+    if (w || h) setReady(true)
     
     const ct = getCt()
     if (ct) {

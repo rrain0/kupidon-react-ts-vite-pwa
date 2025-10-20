@@ -5,11 +5,12 @@ import { DatePlaceCategoriesData, DatePlaceCategoryType }
   from 'src/configs/date-place/DatePlaceCategoriesData.ts'
 import { DatePlacesData } from 'src/configs/date-place/DatePlacesData.ts'
 import { DatePlaceType, DatePlaceTypeData } from 'src/configs/date-place/DatePlaceTypeData.ts'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
-import Gap from '@libs/short-propsed/components/Gap.tsx'
-import Grid from '@libs/short-propsed/components/Grid.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
+import Gap from '@libs/style-as-short-props/elems/Gap.tsx'
+import Grid from '@libs/style-as-short-props/elems/Grid.tsx'
 import DatePlaceCardWide from 'src/components/pages/DatePlaces/parts/DatePlaceCardWide.tsx'
-import DatePlaceCategoriesList from 'src/components/pages/DatePlaces/parts/DatePlaceCategoriesList.tsx'
+import DatePlaceCategoriesList
+  from 'src/components/pages/DatePlaces/parts/DatePlaceCategoriesList.tsx'
 import BottomFloatingBar from 'src/components/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/components/components/screen-bars/parts/BackButton.tsx'
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
@@ -29,7 +30,9 @@ type DatePlacesPagePropsCategory = { category: DatePlaceCategoryType }
 export type DatePlacesPageProps = DatePlacesPagePropsType | DatePlacesPagePropsCategory
 
 const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
-  const { type, category } = props as ObjectUnionFix<DatePlacesPagePropsType, DatePlacesPagePropsCategory>
+  const {
+    type, category,
+  } = props as ObjectUnionFix<DatePlacesPagePropsType, DatePlacesPagePropsCategory>
   
   const uiValues = useMemo(() => ({
     pageTitle: (() => {
@@ -85,6 +88,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
     </>
   )
 })
+DatePlacesPage.displayName = 'DatePlacesPage'
 export default DatePlacesPage
 
 

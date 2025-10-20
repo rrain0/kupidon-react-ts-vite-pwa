@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import React from 'react'
 
 import { StyleVals } from 'src/styles/StyleVals.ts'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
 import {
   RadioInputGroupStyle,
 } from 'src/components/elems/inputs/RadioInputGroup/RadioInputGroupStyle.ts'

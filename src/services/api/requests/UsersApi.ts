@@ -1,12 +1,14 @@
-import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
+import { handleResponse } from '@libs/api/response/apiResponse.ts'
+import {
+  type AuthenticationError,
+  handleAuthenticatedResponse,
+} from '@libs/api/response/apiResponseAuth.ts'
+import type { TechnicalError } from '@libs/api/response/apiResponseCore.ts'
 import { UserStrangerA } from 'src/models/api/UserA.ts'
 import { UserPairA } from 'src/models/api/UserPairA.ts'
 import { ApiV1Routes } from 'src/services/api/ApiV1Routes.ts'
-import TechnicalError = ApiResponseUtils.TechnicalError
-import handleResponse = ApiResponseUtils.handleResponse
-import AuthenticationError = ApiResponseUtils.AuthenticationError
-import { ax, axAccess } from 'src/services/api/axiosConfig.ts'
-import handleAuthenticatedResponse = ApiResponseUtils.handleAuthenticatedResponse
+import { ax } from 'src/services/api/axios-config/ax.ts'
+import { axAccess } from 'src/services/api/axios-config/axAccess.ts'
 
 
 

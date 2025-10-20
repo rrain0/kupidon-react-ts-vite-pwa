@@ -2,7 +2,7 @@ import { Global } from '@emotion/react'
 import { cssToPx } from '@utils/css/cssUtils.ts'
 import React, { ReactNode } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
-import Grid from '@libs/short-propsed/components/Grid.tsx'
+import Grid from '@libs/style-as-short-props/elems/Grid.tsx'
 import { Pu } from '@utils/base/tsUtils.ts'
 import modalFloor100 = StyleVals.modalFloor100
 

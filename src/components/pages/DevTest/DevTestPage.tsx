@@ -1,9 +1,9 @@
 import { css } from '@emotion/react'
 import React, { useState } from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
-import Gap from '@libs/short-propsed/components/Gap.tsx'
-import Grid from '@libs/short-propsed/components/Grid.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
+import Gap from '@libs/style-as-short-props/elems/Gap.tsx'
+import Grid from '@libs/style-as-short-props/elems/Grid.tsx'
 import { Hdrs } from 'src/components/elems/basic-elements/Hdrs.tsx'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import AppLink from 'src/components/components/app-router/AppLink.tsx'
@@ -16,7 +16,7 @@ import CheckboxInput from 'src/components/elems/inputs/CheckboxInput/CheckboxInp
 import { CheckboxInputStyle } from 'src/components/elems/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import PieProgress, { PieProgressCssProps } from 'src/components/elems/PieProgress/PieProgress.tsx'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
-import { useBool } from '@utils/state/react/useBool.ts'
+import { useBool0 } from '@utils/state/react/useBool0.ts'
 import { useInterval } from '@utils/react/useInterval.ts'
 import RootRoute = AppRoutes.RootRoute
 import checkmarkBold from '@ic/normal/ui/checkmark-bold.svg'
@@ -29,9 +29,9 @@ import checkmarkBold from '@ic/normal/ui/checkmark-bold.svg'
 const DevTestPage = React.memo(() => {
   
   
-  const [isChecked, , , toggleIsChecked] = useBool(false)
+  const [isChecked, , , toggleIsChecked] = useBool0(false)
   
-  const [onEventVal, , , toggleOnEventVal] = useBool(false)
+  const [onEventVal, , , toggleOnEventVal] = useBool0(false)
   
   
   //console.log('TestPage render')

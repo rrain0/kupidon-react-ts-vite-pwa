@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Option } from 'src/models/ui/Option.ts'
-import { arrAddUniqToIf, arrRemoveToIf } from '@utils/base/arrayUtils.ts'
+import { arrAddUniqToIf, arrRemoveToIf } from '@utils/base/array/arrayUtils.ts'
 import { Setter } from '@utils/base/tsUtils.ts'
 
 

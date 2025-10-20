@@ -1,4 +1,3 @@
-
 import clsx from 'clsx'
 import React from 'react'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'

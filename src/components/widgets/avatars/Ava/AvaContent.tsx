@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 
-import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
+import { flexStyle } from '@libs/style-as-short-props/style/flexStyle.ts'
 import React from 'react'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
 import HeartsDoubleIc from 'src/components/elems/icons/SvgIcons/pack/special/HeartsDoubleIc.tsx'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import ImgSpark from 'src/components/elems/ImgSpark/ImgSpark.tsx'

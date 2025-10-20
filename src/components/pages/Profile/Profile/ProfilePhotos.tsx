@@ -2,6 +2,7 @@ import { css, keyframes } from '@emotion/react'
 import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { useAppTheme } from '@utils/app/theme/useAppTheme.ts'
+import { array } from '@utils/base/array/arrayCreateUtils.ts'
 import { random } from '@utils/base/math/randomUtils.ts'
 import { trimExt } from '@utils/bin/fileUtils.ts'
 import { useNoTouchAction } from '@utils/move/pointer/useNoTouchAction.ts'
@@ -23,7 +24,7 @@ import {
   MediaOperation, newDefaultLocalMediaInArray,
   newDefaultMediaOperation,
 } from '@libs/media/Media.ts'
-import Contents from '@libs/short-propsed/components/Contents.tsx'
+import Contents from '@libs/style-as-short-props/elems/Contents.tsx'
 import DashedBorder from 'src/components/elems/basic-elements/DashedBorder.tsx'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import {
@@ -35,11 +36,10 @@ import ProfilePhotosPhotoOptions, {
 } from 'src/components/pages/Profile/options/ProfilePhotosPhotoOptions.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import {
-  arr,
   arrReplaceOneToIfBy,
   arrMapOneToIf,
   arrHasAny,
-} from '@utils/base/arrayUtils.ts'
+} from '@utils/base/array/arrayUtils.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { blobToDataUrl } from '@utils/bin/binDataUtils.ts'
@@ -174,7 +174,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   
   
   const photosGrid = useRef<HTMLDivElement>(null)
-  const photoFrameRefs = useRef<(Element | null)[]>(arr(6).map(i => null))
+  const photoFrameRefs = useRef<(Element | null)[]>(array(6).map(i => null))
   
   
   

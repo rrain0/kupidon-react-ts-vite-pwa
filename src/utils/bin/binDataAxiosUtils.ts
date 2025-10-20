@@ -3,7 +3,7 @@ import axiosRetry from 'axios-retry'
 import {
   axiosCommonConfig,
   axiosRetryCommonConfig,
-} from 'src/services/api/axiosConfig.ts'
+} from 'src/services/api/axios-config/axiosCommonConfig.ts'
 import { type Cb1, isdef } from 'src/utils/base/tsUtils.ts'
 
 

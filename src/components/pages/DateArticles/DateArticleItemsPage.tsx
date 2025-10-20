@@ -10,9 +10,9 @@ import {
   DateArticleTypesData,
 } from 'src/configs/date-article/DateArticleTypesData.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
-import Gap from '@libs/short-propsed/components/Gap.tsx'
-import Grid from '@libs/short-propsed/components/Grid.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
+import Gap from '@libs/style-as-short-props/elems/Gap.tsx'
+import Grid from '@libs/style-as-short-props/elems/Grid.tsx'
 import DateArticleCategoryRow from 'src/components/pages/DateArticles/parts/DateArticleCategoryRow.tsx'
 import DateArticleItemCardWide from 'src/components/pages/DateArticles/parts/DateArticleItemCardWide.tsx'
 import DateArticleItemToCardData

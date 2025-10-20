@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
-import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
+import { flexStyle } from '@libs/style-as-short-props/style/flexStyle.ts'
 import clsx from 'clsx'
 import React from 'react'
 
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
 import { Pu } from '@utils/base/tsUtils.ts'
 import { FunOrObj } from '@utils/base/tsUtils.ts'
 import { isfunction } from '@utils/base/tsUtils.ts'

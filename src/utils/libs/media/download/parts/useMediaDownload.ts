@@ -2,10 +2,10 @@ import { withThrottle } from 'src/utils/base/asyncUtils.ts'
 import { random } from 'src/utils/base/math/randomUtils.ts'
 import { blobToDataUrl } from 'src/utils/bin/binDataUtils.ts'
 import { axiosToBlob } from '@utils/bin/binDataAxiosUtils.ts'
+import { isConnectionError } from 'src/utils/libs/api/response/apiResponse.ts'
 import { StagedProgress } from 'src/utils/ui/StagedProgress.ts'
 import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
 import { useEffect } from 'react'
-import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import {
   MediaDownloadable,
   MediaOperation,
@@ -140,7 +140,7 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
               updateMedia({ removeDownload: true })
               return
             }
-            if (ApiResponseUtils.isConnectionError(ex)) {
+            if (isConnectionError(ex)) {
               updateMedia({
                 updateMedia: { downloadError: ex, needRetryDownload: true },
                 removeDownload: true,

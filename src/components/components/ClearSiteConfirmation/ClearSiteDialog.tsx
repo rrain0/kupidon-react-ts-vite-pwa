@@ -12,7 +12,7 @@ import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { clearSiteData } from '@utils/js/clearSiteData.ts'
 
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
-import { useBool } from '@utils/state/react/useBool.ts'
+import { useBool0 } from '@utils/state/react/useBool0.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import fixed = EmotionCommon.fixed
 import flexC = EmotionCommon.flexC
@@ -40,7 +40,7 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
   const actionText = useUiValues(ActionUiText)
   
   
-  const [needClear, clear] = useBool(false)
+  const [needClear, clear] = useBool0(false)
   useEvent(() => {
     if (needClear) {
       ;(async() => {

@@ -6,7 +6,7 @@ import { DatePlaceCategoriesData, DatePlaceCategoryType }
   from 'src/configs/date-place/DatePlaceCategoriesData.ts'
 import { DatePlaceType, DatePlaceTypeData } from 'src/configs/date-place/DatePlaceTypeData.ts'
 import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
 import AppNavigate from 'src/components/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params

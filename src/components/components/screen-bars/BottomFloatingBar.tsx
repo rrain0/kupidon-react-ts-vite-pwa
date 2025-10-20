@@ -2,8 +2,8 @@ import { Global } from '@emotion/react'
 import { cssToPx } from '@utils/css/cssUtils.ts'
 import React from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
-import Grid from '@libs/short-propsed/components/Grid.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
+import Grid from '@libs/style-as-short-props/elems/Grid.tsx'
 import AcceptAndCancelButtons
   from 'src/components/components/screen-bars/parts/AcceptAndCancelButtons.tsx'
 import QuickSettingsButton

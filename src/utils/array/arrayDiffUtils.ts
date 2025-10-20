@@ -1,4 +1,4 @@
-import { arrOfUndef } from 'src/utils/base/arrayUtils.ts'
+import { arrOfUndefs } from 'src/utils/base/array/arrayCreateUtils.ts'
 import {
   type CombinerIndexed,
   type ComparatorEq,
@@ -19,8 +19,8 @@ export const diff = <T1, T2 = T1>(
 ): [fwd: (number | undefined)[], back: (number | undefined)[]] => {
   const len1 = arr1.length
   const len2 = arr2.length
-  const fwd: (number | undefined)[] = arrOfUndef(len1)
-  const back: (number | undefined)[] = arrOfUndef(len2)
+  const fwd: (number | undefined)[] = arrOfUndefs(len1)
+  const back: (number | undefined)[] = arrOfUndefs(len2)
   for (let i1 = 0; i1 < len1; i1++) {
     const el1 = arr1[i1]
     for (let i2 = 0; i2 < len2; i2++) {

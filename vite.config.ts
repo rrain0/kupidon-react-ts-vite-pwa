@@ -49,12 +49,12 @@ const pwaOptions: Partial<VitePWAOptions> = {
 export default defineConfig(({ command, mode }) => {
   
   let reactDevServerPort = 40009
-  const now = new Date().toISOString()
+  const buildDate = new Date().toISOString()
   
   let envVarsRuntime: Record<string, string> = {
     // support for legacy libs and node
     'process.env.NODE_ENV': JSON.stringify(mode),
-    'import.meta.env.BUILD_DATE': JSON.stringify(now),
+    'import.meta.env.BUILD_DATE': JSON.stringify(buildDate),
   }
   
   // LOAD ENVS BY VITE (with respect to vite env filename rules!!!)
@@ -84,6 +84,9 @@ export default defineConfig(({ command, mode }) => {
   
   
   return {
+    // Pass desired env variables to runtime
+    define: envVarsRuntime,
+    
     resolve: {
       // Aliases for Vite PWA to build Service Worker.
       alias: {
@@ -163,8 +166,5 @@ export default defineConfig(({ command, mode }) => {
         typescript: true,
       }),
     ],
-    
-    // Pass desired env variables to runtime
-    define: envVarsRuntime,
   }
 })

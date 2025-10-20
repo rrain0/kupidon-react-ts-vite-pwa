@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import Contents from '@libs/short-propsed/components/Contents.tsx'
+import Contents from '@libs/style-as-short-props/elems/Contents.tsx'
 
 import { useAppZustand } from 'src/zustand/app/appZustand.ts'
 import { Pu } from '@utils/base/tsUtils.ts'

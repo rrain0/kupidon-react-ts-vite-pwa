@@ -107,16 +107,14 @@ export default [
   
   
   // https://www.npmjs.com/package/eslint-plugin-react-hooks
-  // Legacy error: TypeError: context.getSource is not a function
-  //...compat.extends('plugin:react-hooks/recommended'),
-  {
-    plugins: {
-      'react-hooks': reactHooks,
-    },
-    rules: {
-    
-    },
-  },
+  // These rules do not work properly and do not convenient.
+  // reactHooks.configs['recommended-latest'],
+  // {
+  //   files: ['src/**/*.{js,jsx,ts,tsx}'],
+  //   rules: {
+  //
+  //   },
+  // },
   
   
   // react-refresh config

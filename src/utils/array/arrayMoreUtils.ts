@@ -1,4 +1,4 @@
-import { lastI } from 'src/utils/base/arrayUtils.ts'
+import { lastI } from 'src/utils/base/array/arrayUtils.ts'
 import { emptyval, type Nonemptyval, Sign } from 'src/utils/base/tsUtils.ts'
 
 

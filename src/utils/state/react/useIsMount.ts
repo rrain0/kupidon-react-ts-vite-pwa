@@ -5,7 +5,7 @@ import { useBool } from 'src/utils/state/react/useBool.ts'
 
 export const useIsMount = () => {
   
-  const [isMount, , setIsNotMount] = useBool(true)
+  const { value: isMount, setFalse: setIsNotMount } = useBool(true)
   
   useEffect(setIsNotMount, [])
   

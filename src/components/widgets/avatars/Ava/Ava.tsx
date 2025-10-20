@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
+import { flexStyle } from '@libs/style-as-short-props/style/flexStyle.ts'
 import React from 'react'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
 import AvaContent, { AvaContentProps } from 'src/components/widgets/avatars/Ava/AvaContent.tsx'
 
 

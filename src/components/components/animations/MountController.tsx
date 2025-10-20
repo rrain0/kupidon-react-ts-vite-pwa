@@ -1,5 +1,5 @@
 import { useAsCallback } from '@utils/state/react/base/useAsCallback.ts'
-import { useBool } from '@utils/state/react/useBool.ts'
+import { useBool0 } from '@utils/state/react/useBool0.ts'
 import React, { useEffect } from 'react'
 
 import { Pu } from '@utils/base/tsUtils.ts'
@@ -25,7 +25,7 @@ const MountController = React.memo((props: MountControllerProps) => {
     isOpen = false,
   } = props
   
-  const [canUnmount, allowUnmount, preventUnmount] = useBool(!isOpen)
+  const [canUnmount, allowUnmount, preventUnmount] = useBool0(!isOpen)
   useEffect(() => { if (isOpen) preventUnmount() }, [isOpen])
   
   if (isOpen || !canUnmount) return children?.({

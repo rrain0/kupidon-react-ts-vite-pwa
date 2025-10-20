@@ -1,5 +1,5 @@
 import React from 'react'
-import Contents from '@libs/short-propsed/components/Contents.tsx'
+import Contents from '@libs/style-as-short-props/elems/Contents.tsx'
 import AutoLangSettings from 'src/components/components/AutoLangSettings/AutoLangSettings.tsx'
 import AppRouting from 'src/components/app/AppRouting.tsx'
 

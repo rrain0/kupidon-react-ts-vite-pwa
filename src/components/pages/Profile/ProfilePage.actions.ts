@@ -1,6 +1,6 @@
+import type { ApiResponse } from '@libs/api/response/apiResponseCore.ts'
 import { random } from '@utils/base/math/randomUtils.ts'
 import { getCurrentTimeZoneName } from '@utils/date/dateUtils.ts'
-import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { UserCurrentA } from 'src/models/api/UserA.ts'
 import { GenderA } from 'src/models/api/GenderA.ts'
 import {
@@ -10,7 +10,7 @@ import {
 } from '@libs/media/Media.ts'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
-import { arrMapOneToIf } from '@utils/base/arrayUtils.ts'
+import { arrMapOneToIf } from '@utils/base/array/arrayUtils.ts'
 import { arrMergeTo, diff2 } from '@utils/array/arrayDiffUtils.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { AuthZustand } from 'src/zustand/auth/authZustand.ts'
@@ -18,7 +18,6 @@ import FormValues = ProfilePageValidation.FormValues
 import AddProfilePhotoErrorData = UserApi.AddProfilePhotoErrorData
 import UpdateUserErrorData = UserApi.UpdateUserErrorData
 import CurrentUserSuccessData = UserApi.CurrentUserSuccessData
-import ApiResponse = ApiResponseUtils.ApiResponse
 import photosComparator = ProfilePageValidation.photosComparator
 import { SetterOrUpdater } from '@utils/base/tsUtils.ts'
 import UserToUpdate = UserApi.UserToUpdate

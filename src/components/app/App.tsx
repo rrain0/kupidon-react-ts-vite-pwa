@@ -37,7 +37,7 @@ widget7Test()
 
 
 
-const App = React.memo(() => {
+const App = () => {
   
   useSearchParamsUrlListener()
   
@@ -90,7 +90,7 @@ const App = React.memo(() => {
       
     </>
   )
-})
+}
 App.displayName = 'App'
 export default App
 

@@ -16,13 +16,13 @@ export type DateTimeData = {
 
 export class DateTime {
   
-  year = 0 // integer (-∞,+∞) // Date fullYear: integer (-∞,+∞)
-  month = 0 // integer [1,12] // Date month: integer [0,11]
-  day = 0 // integer [1,28-31] // Date date: integer [1,28-31]
-  hour = 0 // integer [1,23] // Date hours: integer [1,23]
-  minute = 0 // integer [0,59] // Date minutes: integer [0,59]
-  second = 0 // integer [0,59] // Date seconds: integer [0,59]
-  millisecond = 0 // integer [0,999] // Date seconds: integer [0,999]
+  year = 0 // integer (-∞, +∞) // Date fullYear: integer (-∞, +∞)
+  month = 0 // integer [1, 12] // Date month: integer [0, 11]
+  day = 0 // integer [1, 28-31] // Date date: integer [1, 28-31]
+  hour = 0 // integer [0, 23] // Date hours: integer [0, 23]
+  minute = 0 // integer [0, 59] // Date minutes: integer [0, 59]
+  second = 0 // integer [0, 59] // Date seconds: integer [0, 59]
+  millisecond = 0 // integer [0, 999] // Date seconds: integer [0, 999]
   timezone = 0 // integer in minutes
   
   constructor(data?: DateTimeData | undefined) { this.set(data) }

@@ -1,11 +1,11 @@
 import AnimatedState from '@animated/elems/AnimatedState.tsx'
+import { arrOfIndices } from '@utils/base/array/arrayCreateUtils.ts'
 import { createTrackPropsGetter } from '@utils/move/animated/carousel/createTrackPropsGetter.ts'
 import {
   fixedForwardCarouselMergeProgress,
   getFixedForwardLoopedCarouselProps,
 } from '@utils/move/animated/carousel/props/fixedCarouselProps.ts'
 import { useCarousel } from '@utils/move/animated/carousel/useCarousel.ts'
-import { arrOfIndices } from '@utils/base/arrayUtils.ts'
 import { rf3 } from '@utils/base/math/mathUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { useStateAndRef } from '@utils/state/react/base/useStateAndRef.ts'
@@ -14,7 +14,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { UserToUserApi } from 'src/services/api/requests/UserToUserApi.ts'
 import { MediaInArrayDUC } from '@libs/media/Media.ts'
 import MediaArrayDownloader from '@libs/media/download/MediaArrayDownloader.tsx'
-import Flex from '@libs/short-propsed/components/Flex.tsx'
+import Flex from '@libs/style-as-short-props/elems/Flex.tsx'
 import ProfileCards, {
   ProfileCardsAction,
 } from 'src/components/widgets/ProfileCards/ProfileCards.tsx'

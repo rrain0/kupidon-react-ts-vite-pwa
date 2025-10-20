@@ -1,16 +1,18 @@
+import { handleResponse } from '@libs/api/response/apiResponse.ts'
+import {
+  type AuthenticationError,
+  handleAuthenticatedResponse,
+} from '@libs/api/response/apiResponseAuth.ts'
+import type { NoUserResponseError } from '@libs/api/response/apiResponseCommon.ts'
+import type { TechnicalError } from '@libs/api/response/apiResponseCore.ts'
 import { AxiosRequestConfig } from 'axios'
-import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { UserCurrentA, UserStrangerA } from 'src/models/api/UserA.ts'
 import { GenderA } from 'src/models/api/GenderA.ts'
 import { getDataUrlProps } from '@utils/bin/dataUrl.ts'
 import { axiosToBlob } from '@utils/bin/binDataAxiosUtils.ts'
 import { ApiV1Routes } from 'src/services/api/ApiV1Routes.ts'
-import { ax, axAccess } from 'src/services/api/axiosConfig.ts'
-import handleResponse = ApiResponseUtils.handleResponse
-import TechnicalError = ApiResponseUtils.TechnicalError
-import handleAuthenticatedResponse = ApiResponseUtils.handleAuthenticatedResponse
-import AuthenticationError = ApiResponseUtils.AuthenticationError
-import NoUserResponseError = ApiResponseUtils.NoUserResponseError
+import { ax } from 'src/services/api/axios-config/ax.ts'
+import { axAccess } from 'src/services/api/axios-config/axAccess.ts'
 import { Pu } from '@utils/base/tsUtils.ts'
 import { Cb1 } from '@utils/base/tsUtils.ts'
 import { isdef } from '@utils/base/tsUtils.ts'

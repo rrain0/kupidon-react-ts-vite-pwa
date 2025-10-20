@@ -1,12 +1,12 @@
 import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elems/AnimatedState.tsx'
 import styled from '@emotion/styled'
+import { arrOfIndices, arrOfZeros } from '@utils/base/array/arrayCreateUtils.ts'
 import {
   defaultCarouselMergeProgress,
   getLoopedCarouselProps,
 } from '@utils/move/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@utils/move/animated/carousel/createTrackPropsGetter.ts'
-import { arrOfIndices, arrOfZeros } from '@utils/base/arrayUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { useInterval2 } from '@utils/react/useInterval2.ts'
 import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'

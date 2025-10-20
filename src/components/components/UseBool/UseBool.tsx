@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useBool } from '@utils/state/react/useBool.ts'
+import { useBool0 } from '@utils/state/react/useBool0.ts'
 import { SetterOrUpdater } from '@utils/base/tsUtils.ts'
 import { Pu } from '@utils/base/tsUtils.ts'
 import { ValueOrProducer } from '@utils/base/tsUtils.ts'
@@ -29,7 +29,7 @@ React.memo(
     children
   } = props
   
-  const [value, setTrue, setFalse, toggleValue, setValue] = useBool(initial)
+  const [value, setTrue, setFalse, toggleValue, setValue] = useBool0(initial)
   
   return children?.({
     value,

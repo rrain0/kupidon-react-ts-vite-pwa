@@ -4,7 +4,7 @@ import {
   MediaInArrayDUC,
   newDefaultEmptyLocalMediaInArray,
 } from '@libs/media/Media.ts'
-import Contents from '@libs/short-propsed/components/Contents.tsx'
+import Contents from '@libs/style-as-short-props/elems/Contents.tsx'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import ArrowRefreshCwIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowRefreshCwIc.tsx'
 import DownloadIc from 'src/components/elems/icons/SvgIcons/pack/ui/DownloadIc.tsx'

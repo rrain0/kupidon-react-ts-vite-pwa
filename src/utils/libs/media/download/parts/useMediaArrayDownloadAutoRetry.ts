@@ -1,5 +1,5 @@
 import { useAutoRetry } from 'src/utils/react/useAutoRetry.ts'
-import { arrMapToIf } from 'src/utils/base/arrayUtils.ts'
+import { arrMapToIf } from 'src/utils/base/array/arrayUtils.ts'
 import { MediaDownloadable } from '@libs/media/Media.ts'
 import { SetterOrUpdater } from 'src/utils/base/tsUtils.ts'
 

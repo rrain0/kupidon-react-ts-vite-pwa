@@ -6,7 +6,7 @@ import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { useResizeToSpring } from '@utils/view/useResizeToSpring.ts'
-import { useBool } from '@utils/state/react/useBool.ts'
+import { useBool0 } from '@utils/state/react/useBool0.ts'
 
 
 /*
@@ -41,9 +41,9 @@ export default ElemRefTestPage
 
 const ChainedResize1 = () => {
   
-  const [isSourceDivReady, , , toggleSourceDivReady] = useBool(false)
+  const [isSourceDivReady, , , toggleSourceDivReady] = useBool0(false)
   
-  const [isConnectedDivReady, setConnectedDivReady, setConnectedDivNotReady] = useBool(isSourceDivReady)
+  const [isConnectedDivReady, setConnectedDivReady, setConnectedDivNotReady] = useBool0(isSourceDivReady)
   
   const [spring, springApi] = useSpring(() => ({ w: 0, h: 0 }))
   const updateElem = useResizeRef(elem => {
@@ -101,9 +101,9 @@ const ChainedResize1 = () => {
 
 const ChainedResize2 = () => {
   
-  const [isSourceDivReady, , , toggleSourceDivReady] = useBool(false)
+  const [isSourceDivReady, , , toggleSourceDivReady] = useBool0(false)
   
-  const [isConnectedDivReady, setConnectedDivReady, setConnectedDivNotReady] = useBool(isSourceDivReady)
+  const [isConnectedDivReady, setConnectedDivReady, setConnectedDivNotReady] = useBool0(isSourceDivReady)
   
   const [spring, setElem] = useResizeToSpring(elem => {
     if (!elem) {

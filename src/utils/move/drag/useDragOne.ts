@@ -123,11 +123,11 @@ export const useDragOne = (
   })
   
   return {
-    onPointerDown,
-    onPointerMove,
-    onPointerUp,
-    onPointerCancel,
-    onLostPointerCapture,
+    onPointerDown, // stable
+    onPointerMove, // stable
+    onPointerUp, // stable
+    onPointerCancel, // stable
+    onLostPointerCapture, // stable
   }
 }
 
