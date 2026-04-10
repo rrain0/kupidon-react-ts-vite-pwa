@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
-import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
-import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
-import { Cb1 } from 'src/utils/base/tsUtils.ts'
+import { useAsCallback } from 'src/utils/react/state/base/useAsCallback.ts'
+import { useRefGetSet } from 'src/utils/react/state/base/useRefGetSet.ts'
+import type { Cb1 } from 'src/utils/base/tsUtils.ts'
 
 
 
@@ -11,9 +11,10 @@ export const useResizeRef = <T extends HTMLElement = HTMLDivElement>(
 ) => {
   const onResizeStable = useAsCallback(onResize)
   
-  const [getResizeObserver, setResizeObserver] = useRefGetSet(undefined as undefined | ResizeObserver)
+  const [getResizeObserver, setResizeObserver] =
+    useRefGetSet(undefined as undefined | ResizeObserver)
   
-  const elementFunctionalRef = useCallback((elem: T | null) => {
+  const elemFunRef = useCallback((elem: T | null) => {
     getResizeObserver()?.disconnect()
     setResizeObserver(undefined)
     
@@ -26,6 +27,5 @@ export const useResizeRef = <T extends HTMLElement = HTMLDivElement>(
     }
   }, [])
   
-  return elementFunctionalRef
+  return elemFunRef
 }
-

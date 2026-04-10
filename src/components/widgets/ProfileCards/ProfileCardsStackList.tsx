@@ -8,7 +8,7 @@ import {
 import { useCarousel } from '@utils/move/animated/carousel/useCarousel.ts'
 import { rf3 } from '@utils/base/math/mathUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
-import { useStateAndRef } from '@utils/state/react/base/useStateAndRef.ts'
+import { useStateAndRef } from '@utils/react/state/base/useStateAndRef.ts'
 import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
 import { UserToUserApi } from 'src/services/api/requests/UserToUserApi.ts'

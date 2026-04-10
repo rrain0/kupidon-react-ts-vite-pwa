@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-import { useAsCallback } from '@utils/state/react/base/useAsCallback.ts'
+import { useAsCallback } from '@utils/react/state/base/useAsCallback.ts'
 import React, { useCallback } from 'react'
 import { useSearchParams } from 'react-router'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'

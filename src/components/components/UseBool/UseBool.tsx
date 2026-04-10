@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useBool0 } from '@utils/state/react/useBool0.ts'
+import { useBool0 } from '@utils/react/state/useBool0.ts'
 import { SetterOrUpdater } from '@utils/base/tsUtils.ts'
 import { Pu } from '@utils/base/tsUtils.ts'
 import { ValueOrProducer } from '@utils/base/tsUtils.ts'

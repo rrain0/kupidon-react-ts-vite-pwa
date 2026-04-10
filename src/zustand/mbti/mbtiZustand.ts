@@ -1,4 +1,3 @@
-
 import { createSelector } from 'reselect'
 import { MbtiType } from 'src/models/MbtiType.ts'
 import { create } from 'zustand'

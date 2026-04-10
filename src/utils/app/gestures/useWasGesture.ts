@@ -3,7 +3,7 @@ import { isIOS } from 'react-device-detect'
 
 import { getDragDirection } from 'src/utils/move/drag/getDragDirection.ts'
 import { onPointer, OnPointerEvent } from 'src/utils/move/pointer/onPointer.ts'
-import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
+import { useAsCallback } from 'src/utils/react/state/base/useAsCallback.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { Cb } from 'src/utils/base/tsUtils.ts'
 

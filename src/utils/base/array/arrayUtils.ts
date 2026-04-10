@@ -12,9 +12,9 @@ import {
 /*
 To - в новый массив всегда.
 ToIf - в новый массив, если произошли изменения.
-  Значения сравниваются через shallow equals.
+  Значения сравниваются через equals.
 By - значение будет искаться с помощью функции-фильтра.
-  Без By - искать по переданному значению через shallow equals.
+  Без By - искать по переданному значению через equals.
   Map / MapOne - подразумевает By. Replace - подразумевает отсутствие By.
   (Над этим ещё подумать надо.)
   
@@ -58,6 +58,8 @@ export const arrHasntAny = (arr: readonly any[], value: any): boolean => (
 )
 
 
+
+export const isLastI = (arr: readonly any[], i: number) => i === arr.length - 1
 
 export const lastI = (arr: readonly any[]) => arr.length - 1
 

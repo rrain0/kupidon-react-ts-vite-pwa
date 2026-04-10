@@ -1,6 +1,6 @@
 import type { ApiResponse, ResponseError } from 'src/utils/libs/api/response/apiResponseCore.ts'
-import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
-import { useStateAndRef } from 'src/utils/state/react/base/useStateAndRef.ts'
+import { useAsCallback } from 'src/utils/react/state/base/useAsCallback.ts'
+import { useStateAndRef } from 'src/utils/react/state/base/useStateAndRef.ts'
 import { useState } from 'react'
 import { type Cb } from 'src/utils/base/tsUtils.ts'
 

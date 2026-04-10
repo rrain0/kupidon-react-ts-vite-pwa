@@ -4,7 +4,7 @@ import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
 
 import { useWasGesture } from '@utils/app/gestures/useWasGesture.ts'
-import { useAsCallback } from '@utils/state/react/base/useAsCallback.ts'
+import { useAsCallback } from '@utils/react/state/base/useAsCallback.ts'
 import { flexStyle } from '@libs/style-as-short-props/style/flexStyle.ts'
 import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import React, { useEffect } from 'react'

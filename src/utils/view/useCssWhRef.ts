@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { useResizeRef } from 'src/utils/view/useResizeRef'
+import { useResizeRef } from 'src/utils/elem/react/useResizeRef.ts'
 import { getViewProps } from 'src/utils/view/ViewProps'
 
 

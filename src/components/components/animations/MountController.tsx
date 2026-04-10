@@ -1,5 +1,5 @@
-import { useAsCallback } from '@utils/state/react/base/useAsCallback.ts'
-import { useBool0 } from '@utils/state/react/useBool0.ts'
+import { useAsCallback } from '@utils/react/state/base/useAsCallback.ts'
+import { useBool0 } from '@utils/react/state/useBool0.ts'
 import React, { useEffect } from 'react'
 
 import { Pu } from '@utils/base/tsUtils.ts'

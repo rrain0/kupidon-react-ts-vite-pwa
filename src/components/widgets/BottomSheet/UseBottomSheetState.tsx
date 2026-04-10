@@ -1,4 +1,4 @@
-import { useStateSync } from '@utils/state/react/useStateSync.ts'
+import { useStateSync } from '@utils/react/state/useStateSync.ts'
 import React, { useCallback, useMemo, useState } from 'react'
 
 import {

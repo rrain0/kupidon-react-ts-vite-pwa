@@ -4,7 +4,7 @@ import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import RulerVerticalGradIc
   from 'src/components/elems/icons/GradSvgIcons/pack/special/RulerVerticalGradIc.tsx'
 import { arrEq } from '@utils/base/array/arrayUtils.ts'
-import { useStateMapperSync } from '@utils/state/react/useStateMapperSync.ts'
+import { useStateMapperSync } from '@utils/react/state/useStateMapperSync.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import React, { useState } from 'react'
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'

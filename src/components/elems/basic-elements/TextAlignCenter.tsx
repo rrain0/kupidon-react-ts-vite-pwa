@@ -1,6 +1,6 @@
 import { ReactU } from '@utils/react/ReactU.ts'
 import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
-import { useResizeRef } from '@utils/view/useResizeRef.ts'
+import { useResizeRef } from '@utils/elem/react/useResizeRef.ts'
 import React, { useImperativeHandle, useLayoutEffect } from 'react'
 
 import Flex from '@libs/style-as-short-props/elems/Flex.tsx'

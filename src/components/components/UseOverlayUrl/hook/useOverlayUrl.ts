@@ -1,5 +1,5 @@
 
-import { useBool0 } from '@utils/state/react/useBool0.ts'
+import { useBool0 } from '@utils/react/state/useBool0.ts'
 import { useSearchParamValue } from '@utils/url/useSearchParamValue.ts'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'

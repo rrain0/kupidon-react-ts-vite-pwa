@@ -1,7 +1,7 @@
 import { mergeMappedIf } from '@utils/array/arrayDiffUtils.ts'
 import HourglassGradIc
   from 'src/components/elems/icons/GradSvgIcons/pack/special/HourglassGradIc.tsx'
-import { useStateMapperSync } from '@utils/state/react/useStateMapperSync.ts'
+import { useStateMapperSync } from '@utils/react/state/useStateMapperSync.ts'
 import React, { useState } from 'react'
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { OptionUiText } from 'src/locales/translations/OptionUiText.ts'

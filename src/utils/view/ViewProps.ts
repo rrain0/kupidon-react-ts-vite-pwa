@@ -75,8 +75,9 @@ import type { WH } from 'src/utils/css/cssUtils.ts'
   
   изучить:
   https://learn.javascript.ru/cross-window-communication
-  iframe.contentWindow ссылка на объект window внутри <iframe>.
-  iframe.contentDocument – ссылка на объект document внутри <iframe>, короткая запись для iframe.contentWindow.document.
+  iframe.contentWindow - ссылка на объект window внутри <iframe>.
+  iframe.contentDocument – ссылка на объект document внутри <iframe>,
+    короткая запись для iframe.contentWindow.document.
 */
 
 

@@ -1,5 +1,5 @@
 
-import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
+import { useAsCallback } from 'src/utils/react/state/base/useAsCallback.ts'
 import { useInterval2 } from 'src/utils/react/useInterval2.ts'
 import { Cb } from 'src/utils/base/tsUtils.ts'
 

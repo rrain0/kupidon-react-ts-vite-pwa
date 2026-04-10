@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
+import { useRefGetSet } from 'src/utils/react/state/base/useRefGetSet.ts'
 import { Setter } from 'src/utils/base/tsUtils.ts'
 
 

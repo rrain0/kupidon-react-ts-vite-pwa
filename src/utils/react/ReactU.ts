@@ -11,6 +11,7 @@ import { camelCaseToKebabCase } from 'src/utils/string/namingCaseUtils.ts'
 
 export namespace ReactU {
   
+  // TODO use reactPropTypes
   export type Children = Pu<{ children: React.ReactNode }>
   export type ClassNameProp = string
   export type StyleProp = CSSProperties
@@ -18,6 +19,9 @@ export namespace ReactU {
     className: ClassNameProp
     style: StyleProp
   }>
+  
+  
+  
   export type OnClick<E = Element> = React.MouseEventHandler<E>
   
   

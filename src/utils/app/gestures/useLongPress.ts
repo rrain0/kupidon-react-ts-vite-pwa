@@ -2,7 +2,7 @@ import React from 'react'
 import { isIOS } from 'react-device-detect'
 
 import { useWasGesture } from 'src/utils/app/gestures/useWasGesture.ts'
-import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
+import { useRefGetSet } from 'src/utils/react/state/base/useRefGetSet.ts'
 import { Cb } from 'src/utils/base/tsUtils.ts'
 
 

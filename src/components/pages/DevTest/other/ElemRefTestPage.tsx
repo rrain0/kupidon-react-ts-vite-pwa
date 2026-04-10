@@ -4,9 +4,9 @@ import React, { useState } from 'react'
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import { getViewProps } from '@utils/view/ViewProps.ts'
-import { useResizeRef } from '@utils/view/useResizeRef.ts'
+import { useResizeRef } from '@utils/elem/react/useResizeRef.ts'
 import { useResizeToSpring } from '@utils/view/useResizeToSpring.ts'
-import { useBool0 } from '@utils/state/react/useBool0.ts'
+import { useBool0 } from '@utils/react/state/useBool0.ts'
 
 
 /*

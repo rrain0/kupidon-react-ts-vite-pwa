@@ -4,13 +4,13 @@ import { animated } from '@react-spring/web'
 import { flexStyle } from '@libs/style-as-short-props/style/flexStyle.ts'
 import { arrOfNumbers } from '@utils/base/array/arrayCreateUtils.ts'
 import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
-import { useResizeRef } from '@utils/view/useResizeRef.ts'
+import { useResizeRef } from '@utils/elem/react/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React from 'react'
 import { useEmulatedScroll }
   from 'src/components/pages/DevTest/other/EmulatedScrollTestPage/useEmulatedScroll.ts'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
-import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
+import { useRefGetSet } from '@utils/react/state/base/useRefGetSet.ts'
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
 
 

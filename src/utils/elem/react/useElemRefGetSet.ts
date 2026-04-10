@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Cb1, Getter, Setter } from 'src/utils/base/tsUtils.ts'
-import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
+import { useRefGetSet } from 'src/utils/react/state/base/useRefGetSet.ts'
 
 
 
